@@ -1,23 +1,38 @@
 @extends('layouts.app')
 
 @section('content')
+
+    <div id="carrousel" class="carousel slide pb-4" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="img-fluid "  src="{{URL::asset('img/banner.jpg')}}" alt="imagen instituto">
+            </div>
+
+        </div>
+    </div>
+
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Bienvenido a Bolsa de trabajo</div>
-
+                    <div class="card-header">Últimas ofertas de empleo</div>
                     <div class="card-body">
-                        @guest
-                            <span>Eres un usuario invitado</span>
-                        @else
-                            <span>Eres usuario logueado y tu rol es de {{ Auth::user()->roles()->first()->name  }}</span>
-                        @endguest
+
                     </div>
-
-
                     </div>
                 </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header"><b>Información</b></div>
+                    <div class="card-body">
+                        <p>Bienvenido a la Bolsa de Empleo de I.E.S Comercio.
+                            Este servicio es gratuito y ofrecido a los alumnos de nuestro centro.
+                            Gracias por usar nuestro buscador de empleo</p>
+                    </div>
+                </div>
+            </div>
+
             </div>
         </div>
     </div>

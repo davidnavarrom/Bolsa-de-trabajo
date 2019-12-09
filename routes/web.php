@@ -11,24 +11,29 @@
 |
 */
 
-
-
-
-
-
-
+//Inicio
 Route::get('/', 'HomeController@index')->name('home');
 
-// Home invitado
-//Route::get('/','GuestController@index')->name('guest');
-
+// Registro de usuarios
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('register', 'Auth\RegisterController@register');
 // Autentificación de usuarios.
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
-// Registro de usuarios
-Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-Route::post('register', 'Auth\RegisterController@register');
+// Perfil de usuario
+Route::get('profile', 'UserController@show')->name('profile');
+Route::get('profile/{user}/edit', 'UserController@edit')->name('users.edit');
+Route::patch('profile/{user}/update',  'UserController@update')->name('users.update');
+Route::get('profile/download/{file}',  'UserController@downloadCv')->name('users.downloadcv');
 
 
+//403
+Route::get('unauthorized', function () {
+    return view('unauthorized');
+})->name('unauthorized');
 
+
+Route::fallback(function () {
+    return "No permitido";
+});

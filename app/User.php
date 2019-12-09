@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email','surname','phone','password','cvpath',
     ];
 
     /**
@@ -47,6 +47,7 @@ class User extends Authenticatable
         abort_unless($this->hasAnyRole($roles), 401);
         return true;
     }
+
     public function hasAnyRole($roles)
     {
         if (is_array($roles)) {
@@ -69,4 +70,9 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    public function getRole(){
+      return $this->roles()->first()->name;
+    }
+
 }

@@ -15,8 +15,8 @@ class UpdateUserTableNuevoscampos extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('surname')->after('name');
-            $table->string('phone')->after('surname');
-            $table->string('cvpath')->after('phone');
+            $table->string('phone')->after('surname')->nullable();
+            $table->string('cvpath')->after('phone')->nullable();
             $table->integer('status')->after('cvpath')->comment('value 1 = habilitado; value 0 = deshabilitado')->default(1);
 
         });
