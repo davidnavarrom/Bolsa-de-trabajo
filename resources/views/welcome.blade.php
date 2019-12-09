@@ -12,10 +12,32 @@
     </div>
 
     <div class="container">
+
+        <div class="row pb-4">
+            <div class="col">
+            <div class="card">
+                <div class="card-header">Categorias</div>
+                <div class="card-body text-center">
+
+                    @foreach ($categories as $category)
+
+
+                            <button type="button" class="btn btn-link">{{$category->name}}</button>
+
+
+                    @endforeach
+                </div>
+
+            </div>
+
+        </div>
+
+        </div>
         <div class="row">
             <div class="col-md-8">
+
                 <div class="card">
-                    <div class="card-header">Últimas ofertas de empleo</div>
+                    <div class="card-header">Últimas ofertas</div>
                     <div class="card-body">
 
                     </div>
