@@ -7,6 +7,15 @@ use Illuminate\Http\Request;
 
 class EmploymentCategoryController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('auth');
+        $this->middleware('role:admin');
+
+
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +23,10 @@ class EmploymentCategoryController extends Controller
      */
     public function index()
     {
-        //
+
+        $categories = EmploymentCategory::latest()->paginate(5);
+        return view('category.index',compact('categories'));
+
     }
 
     /**
@@ -24,7 +36,7 @@ class EmploymentCategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('category.create');
     }
 
     /**
@@ -35,19 +47,17 @@ class EmploymentCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $slug = $request->input('slug');
+        $slug = str_slug($slug, '-');
+        $request->merge([ 'slug' => $slug]);
+        $this->validate($request,[ 'name'=>'required', 'slug'=>'required|unique:employment_categories,slug', 'description' =>'required']);
+        EmploymentCategory::create($request->all());
+        return redirect()->route('categorias.index')->with('success','Categoria creada');
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Employment_Category  $employment_Category
-     * @return \Illuminate\Http\Response
-     */
-    public function show(EmploymentCategory $employment_Category)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -55,9 +65,10 @@ class EmploymentCategoryController extends Controller
      * @param  \App\Employment_Category  $employment_Category
      * @return \Illuminate\Http\Response
      */
-    public function edit(EmploymentCategory $employment_Category)
+    public function edit($id)
     {
-        //
+        $category=EmploymentCategory::find($id);
+        return view('category.edit',compact('category'));
     }
 
     /**
@@ -67,9 +78,18 @@ class EmploymentCategoryController extends Controller
      * @param  \App\Employment_Category  $employment_Category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EmploymentCategory $employment_Category)
+    public function update(Request $request, $id)
     {
-        //
+        $slug = $request->input('slug');
+        $slug = str_slug($slug, '-');
+        $request->merge([ 'slug' => $slug]);
+
+
+
+        $this->validate($request,[ 'name'=>'required', 'slug'=>'required|unique:employment_categories,slug,'.$id, 'description' =>'required']);
+        EmploymentCategory::find($id)->update($request->all());
+        return redirect()->route('categorias.index')->with('success','Categoria actualizada');
+
     }
 
     /**
@@ -78,8 +98,11 @@ class EmploymentCategoryController extends Controller
      * @param  \App\Employment_Category  $employment_Category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EmploymentCategory $employment_Category)
+    public function destroy($id)
     {
-        //
+        EmploymentCategory::find($id)->delete();
+        return redirect()->route('categorias.index')->with('success','Categoria eliminada');
     }
+
+
 }

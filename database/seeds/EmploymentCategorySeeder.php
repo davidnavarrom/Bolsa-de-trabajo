@@ -14,27 +14,39 @@ class EmploymentCategorySeeder extends Seeder
     {
 
         DB::table('employment_categories')->insert([
-            'name' => 'Administrativo'
+            'name' => 'Administrativo',
+            'slug' => 'administrativo',
+            'description' => ''
         ]);
 
         DB::table('employment_categories')->insert([
-            'name' => 'Informática'
+            'name' => 'Informática',
+            'slug' => 'informatica',
+            'description' => ''
         ]);
 
         DB::table('employment_categories')->insert([
-            'name' => 'Marketing'
+            'name' => 'Marketing',
+            'slug' => 'marketing',
+            'description' => ''
         ]);
 
         DB::table('employment_categories')->insert([
-            'name' => 'Recursos humanos'
+            'name' => 'Recursos humanos',
+            'slug' => 'recursoshumanos',
+            'description' => ''
         ]);
 
         DB::table('employment_categories')->insert([
-            'name' => 'Construcción'
+            'name' => 'Construcción',
+            'slug' => 'construccion',
+            'description' => ''
         ]);
 
         DB::table('employment_categories')->insert([
-            'name' => 'Contabilidad'
+            'name' => 'Contabilidad',
+            'slug' => 'contabilidad',
+            'description' => ''
         ]);
 
 //

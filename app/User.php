@@ -75,4 +75,10 @@ class User extends Authenticatable
       return $this->roles()->first()->name;
     }
 
+
+    public function isAdministrator()
+    {
+        return $this->hasRole('admin');
+    }
+
 }

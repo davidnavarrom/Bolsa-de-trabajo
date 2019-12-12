@@ -13,8 +13,6 @@ class EmploymentCategoryComposer
     public function compose($view)
     {
         $categories = EmploymentCategory::all();
-
-
         $view->with('categories', $categories);
     }
 }

@@ -27,6 +27,8 @@ Route::get('profile/{user}/edit', 'UserController@edit')->name('users.edit');
 Route::patch('profile/{user}/update',  'UserController@update')->name('users.update');
 Route::get('profile/download/{file}',  'UserController@downloadCv')->name('users.downloadcv');
 
+Route::resource('categorias', 'EmploymentCategoryController');
+
 
 //403
 Route::get('unauthorized', function () {

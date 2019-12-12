@@ -46,7 +46,7 @@ class UserController extends Controller
      */
     public function show()
     {
-        return view('user.profile', ['user' => \Auth::user()]);
+        return view('user.index', ['user' => \Auth::user()]);
     }
 
     /**

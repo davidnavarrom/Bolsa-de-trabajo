@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-8">
                 <div class="card">
-                    <div class="card-header">Tus candidaturas</div>
+                    <div class="card-header">Mis candidaturas</div>
                     <div class="card-body">
 
                     </div>
