@@ -9,7 +9,7 @@
 
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('categorias.update',$category->id) }}">
+                        <form method="POST" action="{{ route('categories.update',$category->id) }}">
                             @method('patch')
                             @csrf
                             <div class="form-group row">

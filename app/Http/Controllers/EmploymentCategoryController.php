@@ -53,7 +53,7 @@ class EmploymentCategoryController extends Controller
         $request->merge([ 'slug' => $slug]);
         $this->validate($request,[ 'name'=>'required', 'slug'=>'required|unique:employment_categories,slug', 'description' =>'required']);
         EmploymentCategory::create($request->all());
-        return redirect()->route('categorias.index')->with('success','Categoria creada');
+        return redirect()->route('categories.index')->with('success','Categoria creada');
 
     }
 
@@ -88,7 +88,7 @@ class EmploymentCategoryController extends Controller
 
         $this->validate($request,[ 'name'=>'required', 'slug'=>'required|unique:employment_categories,slug,'.$id, 'description' =>'required']);
         EmploymentCategory::find($id)->update($request->all());
-        return redirect()->route('categorias.index')->with('success','Categoria actualizada');
+        return redirect()->route('categories.index')->with('success','Categoria actualizada');
 
     }
 
@@ -101,8 +101,11 @@ class EmploymentCategoryController extends Controller
     public function destroy($id)
     {
         EmploymentCategory::find($id)->delete();
-        return redirect()->route('categorias.index')->with('success','Categoria eliminada');
+        return redirect()->route('categories.index')->with('success','Categoria eliminada');
     }
+
+
+
 
 
 }

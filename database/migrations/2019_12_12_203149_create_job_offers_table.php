@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCategoriesTable extends Migration
+class CreateJobOffersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('employment_categories', function (Blueprint $table) {
+        Schema::create('job_offers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('description');
-            $table->string('slug')->unique();
+            $table->text('description');
+            $table->decimal('salary',15,2)->default(0);
+
+            $table->enum('type_working', ['complete','part']);
+            $table->enum('status', ['finished', 'active', 'disabled'])->default('active');
             $table->timestamps();
         });
     }
@@ -29,6 +32,6 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employment_categories');
+        Schema::dropIfExists('job_offers');
     }
 }

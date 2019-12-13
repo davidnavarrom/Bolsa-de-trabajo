@@ -40,6 +40,49 @@
                     <div class="card-header">Últimas ofertas</div>
                     <div class="card-body">
 
+                        @foreach($job_offers as $job_offer)
+
+                            <div class="card b-1 hover-shadow mb-5">
+                                <div class="media card-body">
+
+                                    <div class="media-body">
+                                        <div class="mb-2">
+                                            <h4>{{$job_offer->name}}</h4>
+                                        </div>
+
+                                        <div class="d-block">
+                                            <p class="fs-14 text-fade mb-12">Fecha: <span class="badge badge-primary">{{$job_offer->created_at}}</span> | Jornada: <span class="badge badge-primary">{{$job_offer->type_working}}</span> | Salario: <span class="badge badge-primary">{{$job_offer->salary}} €</span> </p>
+
+                                        </div>
+
+
+                                        <small class="fs-16 fw-300 ls-1">{{str_limit($job_offer->description, $limit = 350, $end = '...')}}</small>
+                                    </div>
+
+                                </div>
+
+                                <footer class="card-footer text-right">
+
+                                    <div class="card-hover-show">
+                                        <a class="btn btn-xs fs-10 btn-bold btn-success" href="#">Más información</a>
+
+                                    </div>
+                                </footer>
+                            </div>
+
+
+
+                        @endforeach
+
+
+
+
+
+
+
+
+
+
                     </div>
                     </div>
                 </div>

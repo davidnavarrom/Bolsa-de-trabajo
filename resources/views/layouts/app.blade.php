@@ -64,7 +64,7 @@
 
 
                                     @if (Auth::user()->isAdministrator())
-                                    <a class="dropdown-item" href="{{route('categorias.index')}}">Categorias</a>
+                                    <a class="dropdown-item" href="{{route('categories.index')}}">Categorias</a>
                                     <a class="dropdown-item" href="#">Ofertas de empleo</a>
                                     @else
                                         <a class="dropdown-item" href="{{ route('profile') }}">
