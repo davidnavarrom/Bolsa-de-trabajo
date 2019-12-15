@@ -28,6 +28,7 @@ Route::patch('profile/{user}/update',  'UserController@update')->name('users.upd
 Route::get('profile/download/{file}',  'UserController@downloadCv')->name('users.downloadcv');
 
 Route::resource('categories', 'EmploymentCategoryController');
+Route::resource('joboffers', 'JobOfferController');
 
 
 //403

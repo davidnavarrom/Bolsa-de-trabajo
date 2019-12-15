@@ -96,6 +96,9 @@
                             Gracias por usar nuestro buscador de empleo</p>
                     </div>
                 </div>
+
+                <!--Facebook-->
+                <button type="button" class="btn btn-fb"><i class="fab fa-facebook-f"></i></button>
             </div>
 
             </div>
