@@ -15,29 +15,28 @@
 
         <div class="row pb-4">
             <div class="col">
-            <div class="card">
-                <div class="card-header">Categorias</div>
-                <div class="card-body text-center">
-
-                    @foreach ($categories as $category)
+                <div class="card">
+                    <div class="card-header">Categorias</div>
+                    <div class="card-body text-center">
+                        @foreach ($categories as $category)
 
 
                             <button type="button" class="btn btn-link">{{$category->name}}</button>
 
 
-                    @endforeach
+                        @endforeach
+                    </div>
+
                 </div>
 
             </div>
-
-        </div>
 
         </div>
         <div class="row">
             <div class="col-md-8">
 
                 <div class="card">
-                    <div class="card-header">Últimas ofertas</div>
+                    <div class="card-header">Últimas ofertas de trabajo</div>
                     <div class="card-body">
 
                         @foreach($jobOffers as $job_offer)
@@ -47,17 +46,25 @@
 
                                     <div class="media-body">
                                         <div class="mb-2">
-                                            <h4> <a href="{{route('joboffers.show',$job_offer->id)}}">{{$job_offer->name}}</a></h4>
+                                            <h4>
+                                                <a href="{{route('joboffers.show',$job_offer->id)}}">{{$job_offer->name}}</a>
+                                            </h4>
 
                                         </div>
 
                                         <div class="d-block">
-                                            <p class="fs-14 text-fade mb-12">Fecha: <span class="badge badge-primary">{{$job_offer->created_at}}</span> | Jornada: <span class="badge badge-primary">{{$job_offer->type_working}}</span> | Salario: <span class="badge badge-primary">{{$job_offer->salary}} €</span> </p>
+                                            <p class="fs-14 text-fade mb-12">Fecha: <span
+                                                    class="badge badge-primary">{{$job_offer->created_at}}</span> |
+                                                Jornada: <span
+                                                    class="badge badge-primary">{{$job_offer->type_working}}</span> |
+                                                Salario: <span
+                                                    class="badge badge-primary">{{$job_offer->salary}} €</span></p>
 
                                         </div>
 
 
-                                        <small class="fs-16 fw-300 ls-1">{{str_limit($job_offer->description, $limit = 350, $end = '...')}}</small>
+                                        <small
+                                            class="fs-16 fw-300 ls-1">{{str_limit($job_offer->description, $limit = 350, $end = '...')}}</small>
                                     </div>
 
                                 </div>
@@ -65,16 +72,17 @@
                                 <footer class="card-footer text-right">
 
                                     <div class="card-hover-show">
-                                        <a class="btn btn-xs fs-10 btn-bold btn-success" href="{{route('joboffers.show',$job_offer->id)}}">Más información</a>
+                                        <a class="btn btn-xs fs-10 btn-bold btn-success"
+                                           href="{{route('joboffers.show',$job_offer->id)}}">Más información</a>
 
                                     </div>
                                 </footer>
                             </div>
                         @endforeach
-                            {!! $jobOffers->links() !!}
-                    </div>
+                        {!! $jobOffers->links() !!}
                     </div>
                 </div>
+            </div>
 
             <div class="col-md-4">
                 <div class="card">
@@ -86,11 +94,29 @@
                     </div>
                 </div>
 
-                <!--Facebook-->
-                <button type="button" class="btn btn-fb"><i class="fab fa-facebook-f"></i></button>
+                <div class="card mt-4">
+                    <div class="card-header">Redes sociales</div>
+                    <div class="card-body text-center">
+                        <a class="btn btn-social-icon btn-twitter ">
+                            <span class ="fa fa-twitter text-white"> </span>
+                        </a>
+
+                        <a class="btn btn-social-icon btn-facebook ">
+                            <span class ="fa fa-facebook text-white"> </span>
+                        </a>
+
+                        <a class="btn btn-social-icon btn-linkedin ">
+                            <span class ="fa fa-linkedin text-white"> </span>
+                        </a>
+
+                        <a class="btn btn-social-icon btn-instagram ">
+                            <span class ="fa fa-instagram text-white"> </span>
+                        </a>
+                    </div>
+                </div>
             </div>
 
-            </div>
         </div>
+    </div>
     </div>
 @endsection

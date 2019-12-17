@@ -69,7 +69,7 @@ Imprescindible castellano y catalán nativos e inglés intermedio o avanzado.
 Incorporación inmediata con jornada completa.';
         $jobOffer2->type_working = 'complete';
         $jobOffer2->salary = '16000';
-        $jobOffer2->status = 'finished';
+        $jobOffer2->status = 'active';
 
         $jobOffer2->save();
         $jobOffer2->employmentCategories()->sync([2]); // array of role ids

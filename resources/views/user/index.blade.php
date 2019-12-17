@@ -56,7 +56,7 @@
 
                                                 @csrf
                                                 @method('DELETE')
-                                                    <button type="submit" class="btn btn-xs fs-10 btn-bold btn-danger">Cancelar inscripción</button>
+                                                    <button type="submit" class="btn btn-xs fs-10 btn-bold btn-danger">Cancelar candidatura</button>
                                                 </form>
                                             </div>
                                         </div>

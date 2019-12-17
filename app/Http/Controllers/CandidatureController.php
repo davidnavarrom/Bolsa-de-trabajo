@@ -51,6 +51,6 @@ class CandidatureController extends Controller
         }else{
             abort(404);
         }
-        return redirect()->route('profile')->with('success','Candidatura eliminada');
+        return redirect()->back()->with('success','Candidatura cancelada correctamente');
     }
 }

@@ -13,7 +13,7 @@
             <div class="col-md-8">
 
                 <div class="card">
-                    <div class="card-header">Información de candidatura</div>
+                    <div class="card-header">Información de oferta de trabajo</div>
                     <div class="card-body">
 
                         <div class="mb-2">
@@ -42,15 +42,43 @@
                 <div class="card">
                     <div class="card-header">Acciones</div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('candidature.store') }}">
-                            @csrf
-                           <input type="hidden" value="{{$jobOffer->id}}" name="jobOfferId">
-                            <button  type="submit" class="btn btn-success btn-lg btn-block">PRESENTAR CANDIDATURA</button>
-                        </form>
+
+                        @if($candidature)
+                            <form action="{{route('candidature.destroy', $candidature->id)}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-lg btn-block">Cancelar candidatura</button>
+                            </form>
+                            @else
+                            <form method="POST" action="{{ route('candidature.store') }}">
+                                @csrf
+                                <input type="hidden" value="{{$jobOffer->id}}" name="jobOfferId">
+                                <button  type="submit" class="btn btn-success btn-lg btn-block">Presentar candidatura</button>
+                            </form>
+                            @endif
                     </div>
                 </div>
 
-                <!--Facebook-->
+                <div class="card mt-4">
+                    <div class="card-header">Compartir oferta de trabajo</div>
+                    <div class="card-body text-center">
+                        <a class="btn btn-social-icon btn-twitter ">
+                            <span class ="fa fa-twitter text-white"> </span>
+                        </a>
+
+                        <a class="btn btn-social-icon btn-facebook ">
+                            <span class ="fa fa-facebook text-white"> </span>
+                        </a>
+
+                        <a class="btn btn-social-icon btn-linkedin ">
+                            <span class ="fa fa-linkedin text-white"> </span>
+                        </a>
+
+                        <a class="btn btn-social-icon btn-instagram ">
+                            <span class ="fa fa-instagram text-white"> </span>
+                        </a>
+                    </div>
+                </div>
             </div>
 
             </div>

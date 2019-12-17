@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Candidature;
 use App\EmploymentCategory;
 use App\JobOffer;
 use Illuminate\Http\Request;
@@ -106,8 +107,17 @@ class JobOfferController extends Controller
      */
     public function show($id)
     {
-        $jobOffer = JobOffer::find($id);
-        return view('joboffers.show',compact('jobOffer'));
+        $user = \Auth::user();
+
+            $jobOffer = JobOffer::find($id);
+            $candidature = null;
+            if($user) {
+                $matchThese = ['user_id' => $user->id, 'job_offers_id' => $jobOffer->id];
+                $candidature = Candidature::where($matchThese)->first();;
+            }
+            return view('joboffers.show',compact('jobOffer','candidature'));
+
+
     }
 
 }
