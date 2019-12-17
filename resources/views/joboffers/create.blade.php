@@ -60,12 +60,12 @@
                             <div class="form-group row">
                                 <label for="categories" class="col-md-4 col-form-label text-md-right">{{ __('Categorias') }}</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-6 @error('categories') is-invalid @enderror" >
 
                                     <select class="form-control" id="categories" name="categories[]"  multiple="multiple" required>
 
-                                        @foreach($categories as $categorie)
-                                            <option value="{{ $categorie->id }}" @if(old('categories[]') == $categorie->id) {{ 'selected' }} @endif>{{ $categorie->name }}</option>
+                                        @foreach($categories as  $key => $categorie)
+                                                <option value="{{$categorie->id }}" {{ (collect(old('categories'))->contains($categorie->id)) ? 'selected':'' }}>{{ $categorie->name }}</option>
                                         @endforeach
                                     </select>
 
@@ -79,19 +79,20 @@
 
 
                             <div class="form-group row">
-                                <label for="typeworking" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de Jornada') }}</label>
+                                <label for="type_working" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de Jornada') }}</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-6 ">
 
-                                    <select class="form-control" id="typeworking" name="typeworking"  >
+                                    <select class="form-control" id="type_working" name="type_working" >
 
                                         @foreach($typeworking as $key => $type)
-                                            <option value="{{$key}}" @if(old('typeworking') == $key) {{ 'selected' }} @endif>{{ $type }}</option>
+                                            <option value="{{$key}}" @if(old('type_working') == $key) {{ 'selected' }} @endif>{{ $type }}</option>
                                         @endforeach
                                     </select>
 
-                                    @error('typeworking')
-                                    <span class="invalid-feedback" role="alert">
+                                    <div class="@error('type_working') is-invalid @enderror"></div>
+                                    @error('type_working')
+                                    <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror

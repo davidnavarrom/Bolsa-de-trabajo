@@ -45,6 +45,7 @@ class JobOfferController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request,[ 'name'=>'required', 'description' =>'required', 'type_working' =>'required|in:'.JobOffer::COMPLETE.','.JobOffer::PART, 'salary' => 'required|numeric']);
         $newJobOffer = JobOffer::create($request->all());
         $categories = $request->input('categories');
         $newJobOffer->employmentCategories()->sync($categories); // array of role ids
@@ -74,6 +75,7 @@ class JobOfferController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request,[ 'name'=>'required', 'description' =>'required', 'type_working' =>'required|in:'.JobOffer::COMPLETE.','. JobOffer::PART, 'salary' => 'required|numeric']);
         $jobOffer = JobOffer::find($id);
         $jobOffer->update($request->all());
         $categories = $request->input('categories');
