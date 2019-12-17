@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\EmploymentCategory;
 use App\JobOffer;
 use Illuminate\Http\Request;
 
 class JobOfferController extends Controller
 {
     public function __construct() {
-        $this->middleware('auth');
-        $this->middleware('role:admin');
+        $this->middleware('auth', ['except' => ['show']]);
+        $this->middleware('role:admin', ['except' => ['show']]);
     }
 
     /**
@@ -19,8 +20,7 @@ class JobOfferController extends Controller
      */
     public function index()
     {
-
-        $jobOffers = JobOffer::latest()->paginate(5);
+        $jobOffers = JobOffer::with('candidatures')->latest()->paginate(5);
         return view('joboffers.index',compact('jobOffers'));
     }
 
@@ -31,7 +31,9 @@ class JobOfferController extends Controller
      */
     public function create()
     {
-        return view('joboffers.create');
+        $categories = EmploymentCategory::all();
+        $typeworking = JobOffer::getPossibleTypeWorking();
+        return view('joboffers.create',compact('categories','typeworking'));
     }
 
     /**
@@ -42,12 +44,10 @@ class JobOfferController extends Controller
      */
     public function store(Request $request)
     {
-//        $slug = $request->input('slug');
-//        $slug = str_slug($slug, '-');
-//        $request->merge([ 'slug' => $slug]);
-//        $this->validate($request,[ 'name'=>'required', 'slug'=>'required|unique:employment_categories,slug', 'description' =>'required']);
-//        JobOffer::create($request->all());
-//        return redirect()->route('categories.index')->with('success','Categoria creada');
+        $newJobOffer = JobOffer::create($request->all());
+        $categories = $request->input('categories');
+        $newJobOffer->employmentCategories()->sync($categories); // array of role ids
+        return redirect()->route('joboffers.index')->with('success','Oferta de empleo creada');
     }
 
     /**
@@ -58,8 +58,10 @@ class JobOfferController extends Controller
      */
     public function edit($id)
     {
-        $jobOffer=JobOffer::find($id);
-        return view('joboffers.edit',compact('$jobOffer'));
+        $jobOffer=JobOffer::with('employmentCategories')->find($id);
+        $categories = EmploymentCategory::all();
+        $typeworking = JobOffer::getPossibleTypeWorking();
+        return view('joboffers.edit',compact('jobOffer','categories','typeworking'));
     }
 
     /**
@@ -71,15 +73,11 @@ class JobOfferController extends Controller
      */
     public function update(Request $request, $id)
     {
-//        $slug = $request->input('slug');
-//        $slug = str_slug($slug, '-');
-//        $request->merge([ 'slug' => $slug]);
-//
-//
-//
-//        $this->validate($request,[ 'name'=>'required', 'slug'=>'required|unique:employment_categories,slug,'.$id, 'description' =>'required']);
-//        EmploymentCategory::find($id)->update($request->all());
-//        return redirect()->route('categories.index')->with('success','Categoria actualizada');
+        $jobOffer = JobOffer::find($id);
+        $jobOffer->update($request->all());
+        $categories = $request->input('categories');
+        $jobOffer->employmentCategories()->sync($categories); // array of role ids
+        return redirect()->route('joboffers.index')->with('success','Oferta de de empleo actualizada');
     }
 
     /**
@@ -90,8 +88,26 @@ class JobOfferController extends Controller
      */
     public function destroy($id)
     {
-        JobOffer::find($id)->delete();
-        return redirect()->route('joboffers.index')->with('success','Oferta de trabajo eliminada');
+        $jobOffer = JobOffer::find($id);
+        if ($jobOffer !== null) {
+            $jobOffer->status = JobOffer::DISABLED;
+            $jobOffer->save();
+        }else{
+            abort(404);
+        }
+        return redirect()->route('joboffers.index')->with('success','Oferta de trabajo desactivada');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $jobOffer = JobOffer::find($id);
+        return view('joboffers.show',compact('jobOffer'));
     }
 
 }

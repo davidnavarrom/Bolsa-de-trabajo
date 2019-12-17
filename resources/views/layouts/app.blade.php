@@ -24,7 +24,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    Bolsa de empleo
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -65,7 +65,7 @@
 
                                     @if (Auth::user()->isAdministrator())
                                     <a class="dropdown-item" href="{{route('categories.index')}}">Categorias</a>
-                                    <a class="dropdown-item" href="#">Ofertas de empleo</a>
+                                    <a class="dropdown-item" href="{{route('joboffers.index')}}">Ofertas de empleo</a>
                                     @else
                                         <a class="dropdown-item" href="{{ route('profile') }}">
                                             {{ __('Perfil') }}

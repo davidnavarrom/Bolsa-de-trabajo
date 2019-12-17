@@ -16,10 +16,10 @@
                     <div class="card-header">
 
                         <div class="row align-items-center">
-                            <div class="col">Listado de Ofertas de trabajo</div>
+                            <div class="col">Listado de Ofertas de empleo</div>
                             <div class="col text-right">
                                 <div class="btn-group">
-                                    <a href="{{route('categories.create')}}" class="btn btn-success" >Añadir Categoria</a>
+                                    <a href="{{route('joboffers.create')}}" class="btn btn-success" >Añadir Oferta de empleo</a>
                                 </div>
                             </div>
                         </div>
@@ -31,29 +31,33 @@
                             <tr>
 
                                 <th>Nombre</th>
-                                <th>Slug</th>
-                                <th >Acciones</th>
+                                <th>Status</th>
+                                <th>Nª candidaturas</th>
+                                <th>Acciones</th>
                             </tr>
-                            @foreach ($categories as $category)
+                            @foreach ($jobOffers as $joboffer)
                                 <tr>
 
-                                    <td style="width: 40%;">{{ $category->name }}</td>
-                                    <td style="width: 40%;">{{ $category->slug }}</td>
-                                    <td class="text-center" style="width: 20%;">
-                                        <form action="{{route('categories.destroy', $category->id)}}" method="POST">
+                                    <td >{{ $joboffer->name }}</td>
+                                    <td ><span class="badge badge-primary job{{$joboffer->getOriginal('status')}}">{{ $joboffer->status }}</span></td>
+                                    <td >{{count($joboffer->candidatures)}}</td>
 
-                                            <a class="btn btn-primary" href="{{route('categories.edit',$category->id)}}">Editar</a>
+                                    <td class="text-center" >
+                                        <form action="{{route('joboffers.destroy', $joboffer->id)}}" method="POST">
+
+                                            <a class="btn btn-primary" href="{{route('joboffers.show',$joboffer->id)}}">Visualizar</a>
+                                            <a class="btn btn-primary" href="{{route('joboffers.edit',$joboffer->id)}}">Editar</a>
 
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Borrar</button>
+                                            <button type="submit" class="btn btn-danger">Desactivar</button>
                                         </form>
                                     </td>
                                 </tr>
                             @endforeach
                         </table>
 
-                        {!! $categories->links() !!}
+                        {!! $jobOffers->links() !!}
                     </div>
                 </div>
             </div>

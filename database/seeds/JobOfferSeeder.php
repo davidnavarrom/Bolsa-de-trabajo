@@ -27,7 +27,7 @@ Entre las funciones a desempeñar están:
         $jobOffer->type_working = 'part';
         $jobOffer->salary = '15000';
         $jobOffer->save();
-        $jobOffer->employmentCategories()->sync([1,1]); // array of role ids
+        $jobOffer->employmentCategories()->sync([1]); // array of role ids
 
 
 
@@ -69,9 +69,10 @@ Imprescindible castellano y catalán nativos e inglés intermedio o avanzado.
 Incorporación inmediata con jornada completa.';
         $jobOffer2->type_working = 'complete';
         $jobOffer2->salary = '16000';
+        $jobOffer2->status = 'finished';
 
         $jobOffer2->save();
-        $jobOffer2->employmentCategories()->sync([2,1]); // array of role ids
+        $jobOffer2->employmentCategories()->sync([2]); // array of role ids
 
 
 
@@ -79,10 +80,10 @@ Incorporación inmediata con jornada completa.';
         $jobOffer4->name = 'Programador PHP';
         $jobOffer4->type_working = 'complete';
         $jobOffer4->salary = '14000';
-
+        $jobOffer4->status = 'disabled';
         $jobOffer4->description = 'En Jamenet Solutions buscamos un desarrollador Back end con experiencia con PHP y Symfony para incorporación inmediata a nuestro equipo de desarrollo en un proyecto estable ubicado en Bilbao. Imprescindible experiencia con GIT y trabajo en equipos de desarrollo.';
         $jobOffer4->save();
-        $jobOffer4->employmentCategories()->sync([4,2]); // array of role ids
+        $jobOffer4->employmentCategories()->sync([4]); // array of role ids
 
     }
 }

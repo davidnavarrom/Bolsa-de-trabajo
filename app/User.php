@@ -37,6 +37,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function candidatures()
+    {
+        return $this->hasMany('App\Candidature','user_id');
+    }
+
     public function roles()
     {
         return $this->belongsToMany(Role::class)->withTimestamps();
@@ -80,5 +85,8 @@ class User extends Authenticatable
     {
         return $this->hasRole('admin');
     }
+
+
+
 
 }

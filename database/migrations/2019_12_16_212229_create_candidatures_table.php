@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class PivotJobOffersCategories extends Migration
+class CreateCandidaturesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class PivotJobOffersCategories extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('categories_job');
-
-        Schema::create('categories_job', function (Blueprint $table) {
+        Schema::create('candidatures', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->enum('status', ['selected','pending', 'notselected'])->default('pending');
+            $table->BigInteger('user_id')->unsigned();
             $table->BigInteger('job_offers_id')->unsigned();
-            $table->BigInteger('employment_categories_id')->unsigned();
-
+            $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
             $table->foreign('job_offers_id')->references('id')->on('job_offers')->onDelete('cascade');;
-            $table->foreign('employment_categories_id')->references('id')->on('employment_categories')->onDelete('cascade');;
         });
     }
 
@@ -31,7 +31,6 @@ class PivotJobOffersCategories extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories_job');
-
+        Schema::dropIfExists('candidatures');
     }
 }

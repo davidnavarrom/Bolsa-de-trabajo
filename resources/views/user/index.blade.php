@@ -16,6 +16,52 @@
                     <div class="card-header">Mis candidaturas</div>
                     <div class="card-body">
 
+                        @foreach($candidatures as $candidature)
+
+                            <div class="card b-1 hover-shadow mb-5">
+                                <div class="media card-body">
+
+                                    <div class="media-body">
+                                        <div class="mb-2">
+                                            <h4>{{$candidature->jobOffer->name}}</h4>
+                                        </div>
+
+                                        <div class="d-block">
+                                            <p class="fs-14 text-fade mb-12">Fecha: <span class="badge badge-primary">{{$candidature->created_at}}</span> | Jornada: <span class="badge badge-primary">{{$candidature->jobOffer->type_working}}</span> | Salario: <span class="badge badge-primary">{{$candidature->jobOffer->salary}} €</span> </p>
+
+                                        </div>
+
+
+                                        <small class="fs-16 fw-300 ls-1">{{str_limit($candidature->jobOffer->description, $limit = 350, $end = '...')}}</small>
+                                    </div>
+
+                                </div>
+
+                                <footer class="card-footer text-right">
+
+
+                                    <div class="card-hover-show">
+
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                    <span><b>Status: </b></span><span class="badge badge-primary candidature{{$candidature->getOriginal('status')}}">{{ $candidature->status }}</span></td>
+
+                                            </div>
+                                            <div>
+                                                <a class="btn btn-xs fs-10 btn-bold btn-success" href="{{route('joboffers.show',$candidature->jobOffer->id)}}">Más información</a>
+                                                <a class="btn btn-xs fs-10 btn-bold btn-danger" href="#">Cancelar inscripción</a>
+
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                </footer>
+                            </div>
+                        @endforeach
+                        {!! $candidatures->links() !!}
+
                     </div>
                 </div>
             </div>

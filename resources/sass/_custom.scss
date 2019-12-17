@@ -8,3 +8,29 @@
     left: 0;
     min-height: 300px;
 }
+
+
+.jobactive{
+     background-color: $green;
+ }
+
+.jobdisabled{
+    background-color: $grey;
+}
+
+.jobfinished{
+    background-color: $red;
+}
+
+
+.candidatureselected{
+    background-color: $green;
+}
+
+.candidaturepending{
+    background-color: $orange;
+}
+
+.canditaturenotselected{
+    background-color: $red;
+}

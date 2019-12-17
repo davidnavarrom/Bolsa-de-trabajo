@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Candidature;
+use App\JobOffer;
 use App\User;
 use Hash;
 use Illuminate\Http\Request;
@@ -10,7 +12,6 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
-
 
     public function __construct() {
         $this->middleware('auth');
@@ -21,11 +22,7 @@ class UserController extends Controller
         $this->middleware('isowner', ['only' => [
             'edit','update'
         ]]);
-
-
-
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -46,7 +43,10 @@ class UserController extends Controller
      */
     public function show()
     {
-        return view('user.index', ['user' => \Auth::user()]);
+
+        $user = \Auth::user();
+        $candidatures = Candidature::where('user_id',\Auth::user()->id)->with('jobOffer')->latest()->paginate(5);
+        return view('user.index',compact('user','candidatures'));
     }
 
     /**
@@ -71,8 +71,6 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-
-
         $this->validate(request(), [
             'name' => 'required',
             'email' => [
@@ -82,7 +80,6 @@ class UserController extends Controller
             'phone' => 'required|numeric|min:9',
             'cv' => 'max:30000|mimes:pdf,doc,docx'
         ]);
-
 
         $user->name = $request->get('name');
         $user->surname = $request->get('surname');
@@ -94,20 +91,15 @@ class UserController extends Controller
         }
 
         if($request->file('cv')){
-
             $path = $request->file('cv')->store('cvs');
             $arrayFilename = explode("/", $path);
             $filename = $arrayFilename[1];
             $user->cvpath = $filename;
 
         }
-
-
         $user->save();
-
         return redirect()->route('profile')
             ->with('success','Datos de usuario actualizados correctamente');
-
     }
 
     /**
@@ -120,7 +112,6 @@ class UserController extends Controller
     {
         //
     }
-
 
     public function downloadCv($file){
 

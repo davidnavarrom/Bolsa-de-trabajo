@@ -9,29 +9,16 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-      //  $this->middleware('auth');
-    }
-
-    /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
-        //$job_offers=JobOffer::with('employmentCategories')->get();
-
-        $job_offers=JobOffer::where('status', 'active')
+        $jobOffers=JobOffer::where('status', 'active')
             ->orderBy('created_at', 'desc')
-            ->take(10)
-            ->get();
+            ->paginate(5);
 
-        return view('welcome',compact('job_offers'));
+        return view('welcome',compact('jobOffers'));
     }
 }

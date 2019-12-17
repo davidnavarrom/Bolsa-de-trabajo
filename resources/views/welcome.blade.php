@@ -5,7 +5,7 @@
     <div id="carrousel" class="carousel slide pb-4" data-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img class="img-fluid "  src="{{URL::asset('img/banner.jpg')}}" alt="imagen instituto">
+                <img class="img-fluid" src="{{URL::asset('img/banner.jpg')}}" alt="imagen instituto">
             </div>
 
         </div>
@@ -40,7 +40,7 @@
                     <div class="card-header">Últimas ofertas</div>
                     <div class="card-body">
 
-                        @foreach($job_offers as $job_offer)
+                        @foreach($jobOffers as $job_offer)
 
                             <div class="card b-1 hover-shadow mb-5">
                                 <div class="media card-body">
@@ -64,32 +64,20 @@
                                 <footer class="card-footer text-right">
 
                                     <div class="card-hover-show">
-                                        <a class="btn btn-xs fs-10 btn-bold btn-success" href="#">Más información</a>
+                                        <a class="btn btn-xs fs-10 btn-bold btn-success" href="{{route('joboffers.show',$job_offer->id)}}">Más información</a>
 
                                     </div>
                                 </footer>
                             </div>
-
-
-
                         @endforeach
-
-
-
-
-
-
-
-
-
-
+                            {!! $jobOffers->links() !!}
                     </div>
                     </div>
                 </div>
 
             <div class="col-md-4">
                 <div class="card">
-                    <div class="card-header"><b>Información</b></div>
+                    <div class="card-header">Información</div>
                     <div class="card-body">
                         <p>Bienvenido a la Bolsa de Empleo de I.E.S Comercio.
                             Este servicio es gratuito y ofrecido a los alumnos de nuestro centro.

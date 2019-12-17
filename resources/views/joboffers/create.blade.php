@@ -5,11 +5,11 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Nueva categoria') }}</div>
+                    <div class="card-header">{{ __('Nueva Oferta de empleo') }}</div>
 
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('categories.store') }}">
+                        <form method="POST" action="{{ route('joboffers.store') }}">
                             @csrf
 
                             <div class="form-group row">
@@ -26,13 +26,50 @@
                                 </div>
                             </div>
 
+
                             <div class="form-group row">
-                                <label for="slug" class="col-md-4 col-form-label text-md-right">{{ __('Slug') }}</label>
+                                <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Descripción') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="slug" type="text" class="form-control @error('slug') is-invalid @enderror" name="slug" value="{{ old('slug') }}" required autocomplete="slug" >
+                                    <input id="description" type="tel" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}" required autocomplete="description" >
 
-                                    @error('slug')
+                                    @error('description')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group row">
+                                <label for="slug" class="col-md-4 col-form-label text-md-right">{{ __('Salario') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="salary" type="number" class="form-control @error('salary') is-invalid @enderror" name="salary" value="{{ old('salary') }}" required autocomplete="salary" >
+
+                                    @error('salary')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="categories" class="col-md-4 col-form-label text-md-right">{{ __('Categorias') }}</label>
+
+                                <div class="col-md-6">
+
+                                    <select class="form-control" id="categories" name="categories[]"  multiple="multiple" required>
+
+                                        @foreach($categories as $categorie)
+                                            <option value="{{ $categorie->id }}" @if(old('categories[]') == $categorie->id) {{ 'selected' }} @endif>{{ $categorie->name }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    @error('categories')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -42,12 +79,18 @@
 
 
                             <div class="form-group row">
-                                <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Descripción') }}</label>
+                                <label for="typeworking" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de Jornada') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="description" type="tel" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}"  autocomplete="description" >
 
-                                    @error('description')
+                                    <select class="form-control" id="typeworking" name="typeworking"  >
+
+                                        @foreach($typeworking as $key => $type)
+                                            <option value="{{$key}}" @if(old('typeworking') == $key) {{ 'selected' }} @endif>{{ $type }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    @error('typeworking')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

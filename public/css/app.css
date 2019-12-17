@@ -11111,3 +11111,27 @@ a.text-dark:focus {
   min-height: 300px;
 }
 
+.jobactive {
+  background-color: #38c172;
+}
+
+.jobdisabled {
+  background-color: #6c757d;
+}
+
+.jobfinished {
+  background-color: #e3342f;
+}
+
+.candidatureselected {
+  background-color: #38c172;
+}
+
+.candidaturepending {
+  background-color: #f6993f;
+}
+
+.canditaturenotselected {
+  background-color: #e3342f;
+}
+
