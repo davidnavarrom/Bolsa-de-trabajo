@@ -52,7 +52,7 @@ class EmploymentCategoryController extends Controller
         $slug = $request->input('slug');
         $slug = str_slug($slug, '-');
         $request->merge([ 'slug' => $slug]);
-        $this->validate($request,[ 'name'=>'required', 'slug'=>'required|unique:employment_categories,slug', 'description' =>'required']);
+        $this->validate($request,[ 'name'=>'required', 'slug'=>'required|unique:employment_categories,slug']);
         EmploymentCategory::create($request->all());
         return redirect()->route('categories.index')->with('success','Categoria creada');
     }
@@ -82,7 +82,7 @@ class EmploymentCategoryController extends Controller
         $slug = $request->input('slug');
         $slug = str_slug($slug, '-');
         $request->merge([ 'slug' => $slug]);
-        $this->validate($request,[ 'name'=>'required', 'slug'=>'required|unique:employment_categories,slug,'.$id, 'description' =>'required']);
+        $this->validate($request,[ 'name'=>'required', 'slug'=>'required|unique:employment_categories,slug,'.$id]);
         EmploymentCategory::find($id)->update($request->all());
         return redirect()->route('categories.index')->with('success','Categoria actualizada');
     }

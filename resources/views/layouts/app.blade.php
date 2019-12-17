@@ -43,12 +43,12 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <li class="nav-item p-1">
+                                <a class="nav-link btn btn-secondary btn-sm text-white " href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Registrarse') }}</a>
+                                <li class="nav-item p-1">
+                                    <a class="nav-link btn btn-primary btn-sm text-white" href="{{ route('register') }}">{{ __('Registrarse') }}</a>
                                 </li>
                             @endif
                         @else
@@ -67,8 +67,8 @@
 
 
                                     @if (Auth::user()->isAdministrator())
-                                    <a class="dropdown-item" href="{{route('categories.index')}}">Categorias</a>
-                                    <a class="dropdown-item" href="{{route('joboffers.index')}}">Ofertas de empleo</a>
+                                     <a class="dropdown-item" href="{{route('joboffers.index')}}">Ofertas de empleo</a>
+                                     <a class="dropdown-item" href="{{route('categories.index')}}">Categorias</a>
                                     @else
                                         <a class="dropdown-item" href="{{ route('profile') }}">
                                             {{ __('Perfil') }}

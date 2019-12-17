@@ -27,6 +27,16 @@
 
                     </div>
                     <div class="card-body">
+
+                        <form action="#" role="search" class="form-inline pull-left srcTop mb-3">
+                            <div class="form-group  m-0">
+                                <label for="searchInput" class="sr-only">Users</label>
+                                <input type="text" name="query" class="form-control input-sm" id="searchInput" placeholder="Buscar...">
+                            </div>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                        </form>
+
+                        <div class="table-responsive">
                         <table class="table table-bordered">
                             <tr>
 
@@ -58,6 +68,7 @@
                         </table>
 
                         {!! $jobOffers->links() !!}
+                        </div>
                     </div>
                 </div>
             </div>

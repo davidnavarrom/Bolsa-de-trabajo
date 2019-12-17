@@ -27,6 +27,8 @@
 
                     </div>
                     <div class="card-body">
+
+                        <div class="table-responsive">
                         <table class="table table-bordered">
                             <tr>
 
@@ -52,6 +54,7 @@
                         </table>
 
                         {!! $categories->links() !!}
+                        </div>
                     </div>
                 </div>
             </div>
