@@ -47,7 +47,8 @@
 
                                     <div class="media-body">
                                         <div class="mb-2">
-                                            <h4>{{$job_offer->name}}</h4>
+                                            <h4> <a href="{{route('joboffers.show',$job_offer->id)}}">{{$job_offer->name}}</a></h4>
+
                                         </div>
 
                                         <div class="d-block">

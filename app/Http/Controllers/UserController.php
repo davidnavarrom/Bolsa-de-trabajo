@@ -45,7 +45,12 @@ class UserController extends Controller
     {
 
         $user = \Auth::user();
+
+       // $candidatures = Candidature::where('user_id',\Auth::user()->id)->with('jobOffer')->latest()->paginate(5);
+
         $candidatures = Candidature::where('user_id',\Auth::user()->id)->with('jobOffer')->latest()->paginate(5);
+
+
         return view('user.index',compact('user','candidatures'));
     }
 

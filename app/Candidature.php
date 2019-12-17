@@ -14,12 +14,12 @@ class Candidature extends Model
 
     public function jobOffer()
     {
-        return $this->hasOne('App\JobOffer','id');
+        return $this->belongsTo('App\JobOffer','job_offers_id','id');
     }
 
     public function user()
     {
-        return $this->hasOne('App\User');
+        return $this->belongsTo('App\User');
     }
 
     public function getStatusAttribute($value) {

@@ -64,7 +64,7 @@ class Kernel extends HttpKernel
         'role' => \App\Http\Middleware\Role::class,
         'candownloadcv' => \App\Http\Middleware\CanDownloadCv::class,
         'isowner' => \App\Http\Middleware\IsOwner::class,
-
+        'owner' => \App\Http\Middleware\AbortIfNotOwner::class,
 
     ];
 

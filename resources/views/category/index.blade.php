@@ -6,7 +6,7 @@
 
         @if ($message = Session::get('success'))
             <div class="alert alert-success">
-                <p>{{ $message }}</p>
+                <span>{{ $message }}</span>
             </div>
         @endif
 
@@ -41,9 +41,7 @@
                                     <td style="width: 40%;">{{ $category->slug }}</td>
                                     <td class="text-center" style="width: 20%;">
                                         <form action="{{route('categories.destroy', $category->id)}}" method="POST">
-
                                             <a class="btn btn-primary" href="{{route('categories.edit',$category->id)}}">Editar</a>
-
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger">Borrar</button>

@@ -1,9 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-
-
     <div class="container">
+
+        @if ($message = Session::get('success'))
+            <div class="alert alert-success">
+                <span>{{ $message }}</span>
+            </div>
+        @endif
 
         <div class="row">
             <div class="col-md-8">
@@ -38,7 +42,11 @@
                 <div class="card">
                     <div class="card-header">Acciones</div>
                     <div class="card-body">
-                        <button type="button" class="btn btn-success btn-lg btn-block">INSCRIBIRSE</button>
+                        <form method="POST" action="{{ route('candidature.store') }}">
+                            @csrf
+                           <input type="hidden" value="{{$jobOffer->id}}" name="jobOfferId">
+                            <button  type="submit" class="btn btn-success btn-lg btn-block">PRESENTAR CANDIDATURA</button>
+                        </form>
                     </div>
                 </div>
 

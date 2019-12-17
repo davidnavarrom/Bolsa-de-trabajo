@@ -6,7 +6,7 @@
 
         @if ($message = Session::get('success'))
             <div class="alert alert-success">
-                <p>{{ $message }}</p>
+                <span>{{ $message }}</span>
             </div>
         @endif
 
@@ -16,6 +16,7 @@
                     <div class="card-header">Mis candidaturas</div>
                     <div class="card-body">
 
+
                         @foreach($candidatures as $candidature)
 
                             <div class="card b-1 hover-shadow mb-5">
@@ -23,7 +24,9 @@
 
                                     <div class="media-body">
                                         <div class="mb-2">
-                                            <h4>{{$candidature->jobOffer->name}}</h4>
+
+                                            <h4> <a href="{{route('joboffers.show',$candidature->jobOffer->id)}}">{{$candidature->jobOffer->name}}</a></h4>
+
                                         </div>
 
                                         <div class="d-block">
@@ -48,9 +51,13 @@
 
                                             </div>
                                             <div>
-                                                <a class="btn btn-xs fs-10 btn-bold btn-success" href="{{route('joboffers.show',$candidature->jobOffer->id)}}">Más información</a>
-                                                <a class="btn btn-xs fs-10 btn-bold btn-danger" href="#">Cancelar inscripción</a>
 
+                                                <form action="{{route('candidature.destroy', $candidature->id)}}" method="POST">
+
+                                                @csrf
+                                                @method('DELETE')
+                                                    <button type="submit" class="btn btn-xs fs-10 btn-bold btn-danger">Cancelar inscripción</button>
+                                                </form>
                                             </div>
                                         </div>
 

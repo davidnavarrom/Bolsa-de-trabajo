@@ -29,8 +29,7 @@ Route::get('profile/download/{file}',  'UserController@downloadCv')->name('users
 
 Route::resource('categories', 'EmploymentCategoryController');
 Route::resource('joboffers', 'JobOfferController');
-
-
+Route::resource('candidature', 'CandidatureController');
 //403
 Route::get('unauthorized', function () {
     return view('unauthorized');
