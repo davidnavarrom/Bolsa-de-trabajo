@@ -76,7 +76,7 @@
             <div class="col-4">
                 <div class="card">
                     <div class="card-header">
-                        <span class="d-inline-block">Datos personales</span>
+                        <span class="d-inline-block">Mis Datos personales</span>
                         <a href="{{route('users.edit', $user->id)}}"><span class="d-inline-block  float-right"><b>Editar</b></span></a>
                     </div>
                     <div class="card-body">
