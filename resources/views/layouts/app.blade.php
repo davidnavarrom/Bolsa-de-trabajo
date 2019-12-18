@@ -44,7 +44,7 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item p-1">
-                                <a class="nav-link btn btn-secondary btn-sm text-white " href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link btn btn-secondary btn-sm text-white " href="{{ route('login') }}"><i class="fa fa-user"></i> {{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item p-1">
@@ -71,14 +71,14 @@
                                      <a class="dropdown-item" href="{{route('categories.index')}}">Categorias</a>
                                     @else
                                         <a class="dropdown-item" href="{{ route('profile') }}">
-                                            {{ __('Perfil') }}
+                                            <i class="fa fa-user"></i> {{ __('Perfil') }}
                                         </a>
                                     @endif
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        <i class="fa fa-sign-out"></i> {{ __('Logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -93,7 +93,7 @@
                 </div>
             </div>
         </nav>
-        @if( Route::currentRouteName() == "home")
+        @if( Route::currentRouteName() == "home" || Route::currentRouteName() == "home.search")
          <main class="py-0">
         @else
          <main class="py-4">

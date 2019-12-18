@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Employment_Category;
 use App\EmploymentCategory;
+use App\JobOffer;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
@@ -101,6 +102,15 @@ class EmploymentCategoryController extends Controller
 
 
 
+    public function search(Request $request){
 
+        $name = $request->name;
+
+        $categories = EmploymentCategory::where('name', $name)
+            ->orWhere('name', 'like', '%' . $name . '%')->latest()->paginate(5);
+
+
+        return view('category.index',compact('categories'))->with('searched','Buscando resultados por: ' . $name);
+    }
 
 }

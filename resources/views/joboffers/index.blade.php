@@ -6,7 +6,13 @@
 
         @if ($message = Session::get('success'))
             <div class="alert alert-success">
-                <span>{{ $message }}</span>
+                <i class="fa fa-info-circle"></i> <span>{{ $message }}</span>
+            </div>
+        @endif
+
+        @if (!empty($searched))
+            <div class="alert alert-primary">
+                <i class="fa fa-info-circle"></i> <span>{{ $searched }}</span>
             </div>
         @endif
 
@@ -19,7 +25,8 @@
                             <div class="col">Listado de Ofertas de empleo</div>
                             <div class="col text-right">
                                 <div class="btn-group">
-                                    <a href="{{route('joboffers.create')}}" class="btn btn-success" >Añadir Oferta de empleo</a>
+                                    <a href="{{route('joboffers.create')}}" class="btn btn-success"><i class="fa fa-plus"></i> Añadir Oferta de
+                                        empleo</a>
                                 </div>
                             </div>
                         </div>
@@ -28,46 +35,59 @@
                     </div>
                     <div class="card-body">
 
-                        <form action="#" role="search" class="form-inline pull-left srcTop mb-3">
+                        <form action="{{route('joboffers.search')}}" role="search" method="GET"
+                              class="form-inline pull-left srcTop mb-3">
                             <div class="form-group  m-0">
                                 <label for="searchInput" class="sr-only">Users</label>
-                                <input type="text" name="query" class="form-control input-sm" id="searchInput" placeholder="Buscar...">
+                                <input type="text" name="name" class="form-control input-sm" id="searchInput"
+                                       placeholder="Buscar...">
                             </div>
                             <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
                         </form>
 
                         <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <tr>
-
-                                <th>Nombre</th>
-                                <th>Status</th>
-                                <th>Nª candidaturas</th>
-                                <th>Acciones</th>
-                            </tr>
-                            @foreach ($jobOffers as $joboffer)
+                            <table class="table table-bordered">
                                 <tr>
 
-                                    <td >{{ $joboffer->name }}</td>
-                                    <td ><span class="badge badge-primary job{{$joboffer->getOriginal('status')}}">{{ $joboffer->status }}</span></td>
-                                    <td >{{count($joboffer->candidatures)}}</td>
-
-                                    <td class="text-center" >
-                                        <form action="{{route('joboffers.destroy', $joboffer->id)}}" method="POST">
-
-                                            <a class="btn btn-primary" href="{{route('joboffers.show',$joboffer->id)}}">Visualizar</a>
-                                            <a class="btn btn-primary" href="{{route('joboffers.edit',$joboffer->id)}}">Editar</a>
-
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Desactivar</button>
-                                        </form>
-                                    </td>
+                                    <th>Nombre</th>
+                                    <th>Status</th>
+                                    <th>Nª candidaturas</th>
+                                    <th>Acciones</th>
                                 </tr>
-                            @endforeach
-                        </table>
+                                @foreach ($jobOffers as $joboffer)
+                                    <tr>
 
-                        {!! $jobOffers->links() !!}
+                                        <td>{{ $joboffer->name }}</td>
+                                        <td><span
+                                                class="badge badge-primary job{{$joboffer->getOriginal('status')}}">{{ $joboffer->status }}</span>
+                                        </td>
+                                        <td>{{count($joboffer->candidatures)}}</td>
+
+                                        <td class="text-center">
+
+                                            <div class="dropdown">
+                                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fa fa-cogs"></i>
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <a class="dropdown-item" href="{{route('joboffers.show',$joboffer->id)}}">Visualizar</a>
+                                                    <a class="dropdown-item" href="{{route('joboffers.edit',$joboffer->id)}}">Editar</a>
+                                                    <form action="{{route('joboffers.destroy', $joboffer->id)}}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="dropdown-item">Desactivar</button>
+
+                                                    </form>
+                                                </div>
+                                            </div>
+
+
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </table>
+
+                            {!! $jobOffers->links() !!}
                         </div>
                     </div>
                 </div>

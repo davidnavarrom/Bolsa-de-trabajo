@@ -5,7 +5,7 @@
 
         @if ($message = Session::get('success'))
             <div class="alert alert-success">
-                <span>{{ $message }}</span>
+                <i class="fa fa-info-circle"></i>  <span>{{ $message }}</span>
             </div>
         @endif
 
@@ -13,7 +13,7 @@
             <div class="col-md-8">
 
                 <div class="card">
-                    <div class="card-header">Información de oferta de trabajo</div>
+                    <div class="card-header"><i class="fa fa-briefcase"></i> Información de oferta de trabajo</div>
                     <div class="card-body">
 
                         <div class="mb-2">
@@ -47,13 +47,13 @@
                             <form action="{{route('candidature.destroy', $candidature->id)}}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-lg btn-block">Cancelar candidatura</button>
+                                <button type="submit" class="btn btn-danger btn-lg btn-block"><i class="fa fa-times"></i> Cancelar candidatura</button>
                             </form>
                             @else
                             <form method="POST" action="{{ route('candidature.store') }}">
                                 @csrf
                                 <input type="hidden" value="{{$jobOffer->id}}" name="jobOfferId">
-                                <button  type="submit" class="btn btn-success btn-lg btn-block">Presentar candidatura</button>
+                                <button  type="submit" class="btn btn-success btn-lg btn-block"><i class="fa fa-clipboard"></i> Presentar candidatura</button>
                             </form>
                             @endif
                     </div>

@@ -12,18 +12,22 @@
     </div>
 
     <div class="container">
-
         <div class="row pb-4">
             <div class="col">
                 <div class="card">
-                    <div class="card-header">Categorias</div>
+                    <div class="card-header"><i class="fa fa-tags"></i> Categorias</div>
                     <div class="card-body text-center">
                         @foreach ($categories as $category)
+                            @if(empty($categorySelected))
+                                <a href="{{route('home.search',$category->slug)}}" class="btn btn-link">{{$category->name}}</a>
+                            @else
+                                @if($category->id == $categorySelected->id)
+                                <a href="{{route('home.search',$category->slug)}}" class="btn btn-link font-weight-bold">{{$category->name}}</a>
+                                 @else
+                                    <a href="{{route('home.search',$category->slug)}}" class="btn btn-link">{{$category->name}}</a>
 
-
-                            <button type="button" class="btn btn-link">{{$category->name}}</button>
-
-
+                                @endif
+                            @endif
                         @endforeach
                     </div>
 
@@ -36,7 +40,7 @@
             <div class="col-md-8 pb-4">
 
                 <div class="card">
-                    <div class="card-header">Últimas ofertas de trabajo</div>
+                    <div class="card-header"><i class="fa fa-list"></i> Últimas ofertas de trabajo</div>
                     <div class="card-body">
 
                         @foreach($jobOffers as $job_offer)
@@ -72,8 +76,8 @@
                                 <footer class="card-footer text-right">
 
                                     <div class="card-hover-show">
-                                        <a class="btn btn-xs fs-10 btn-bold btn-success"
-                                           href="{{route('joboffers.show',$job_offer->id)}}">Más información</a>
+                                        <a class="btn btn-xs fs-10 btn-bold btn-primary"
+                                           href="{{route('joboffers.show',$job_offer->id)}}"><i class="fa fa-info-circle"></i> Más información</a>
 
                                     </div>
                                 </footer>
@@ -86,7 +90,7 @@
 
             <div class="col-md-4 pb-4">
                 <div class="card">
-                    <div class="card-header">Información</div>
+                    <div class="card-header">Acerca de</div>
                     <div class="card-body">
                         <p>Bienvenido a la Bolsa de Empleo de I.E.S Comercio.
                             Este servicio es gratuito y ofrecido a los alumnos de nuestro centro.

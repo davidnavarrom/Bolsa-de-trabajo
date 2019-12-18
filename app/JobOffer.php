@@ -79,4 +79,9 @@ class JobOffer extends Model
         }
         return $values;
     }
+
+    public function scopeWithAndWhereHas($query, $relation, $constraint){
+        return $query->whereHas($relation, $constraint)
+            ->with([$relation => $constraint]);
+    }
 }

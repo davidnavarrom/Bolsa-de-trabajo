@@ -6,14 +6,14 @@
 
         @if ($message = Session::get('success'))
             <div class="alert alert-success">
-                <span>{{ $message }}</span>
+                <i class="fa fa-info-circle"></i>  <span>{{ $message }}</span>
             </div>
         @endif
 
         <div class="row">
             <div class="col-8">
                 <div class="card">
-                    <div class="card-header">Mis candidaturas</div>
+                    <div class="card-header"><i class="fa fa-clipboard"></i> Mis candidaturas</div>
                     <div class="card-body">
 
 
@@ -56,7 +56,7 @@
 
                                                 @csrf
                                                 @method('DELETE')
-                                                    <button type="submit" class="btn btn-xs fs-10 btn-bold btn-danger">Cancelar candidatura</button>
+                                                    <button type="submit" class="btn btn-xs fs-10 btn-bold btn-danger"><i class="fa fa-times"></i> Cancelar candidatura</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -77,7 +77,7 @@
                 <div class="card">
                     <div class="card-header">
                         <span class="d-inline-block">Mis Datos personales</span>
-                        <a href="{{route('users.edit', $user->id)}}"><span class="d-inline-block  float-right"><b>Editar</b></span></a>
+                        <a href="{{route('users.edit', $user->id)}}"><span class="d-inline-block  float-right"><b><i class="fa fa-pencil"></i> Editar</b></span></a>
                     </div>
                     <div class="card-body">
 
@@ -151,7 +151,7 @@
                             <div class="col-12">
                                 @if($user->cvpath)
                                     <a class="btn btn-primary w-100"
-                                       href="{{ route('users.downloadcv', $user->cvpath)  }}" role="button">Descargar
+                                       href="{{ route('users.downloadcv', $user->cvpath)  }}" role="button"><i class="fa fa-download"></i> Descargar
                                         Currículum</a>
                                 @else
                                     <a class="btn btn-primary w-100" href="#" role="button">Subir Currículum</a>

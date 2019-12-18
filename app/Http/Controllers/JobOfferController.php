@@ -6,6 +6,7 @@ use App\Candidature;
 use App\EmploymentCategory;
 use App\JobOffer;
 use Illuminate\Http\Request;
+use Symfony\Component\Console\Input\Input;
 
 class JobOfferController extends Controller
 {
@@ -22,6 +23,7 @@ class JobOfferController extends Controller
     public function index()
     {
         $jobOffers = JobOffer::with('candidatures')->latest()->paginate(5);
+
         return view('joboffers.index',compact('jobOffers'));
     }
 
@@ -120,6 +122,18 @@ class JobOfferController extends Controller
             return view('joboffers.show',compact('jobOffer','candidature'));
 
 
+    }
+
+
+    public function search(Request $request){
+
+        $name = $request->name;
+
+        $jobOffers = JobOffer::with('candidatures')->where('name', $name)
+            ->orWhere('name', 'like', '%' . $name . '%')->latest()->paginate(5);
+
+
+        return view('joboffers.index',compact('jobOffers'))->with('searched','Buscando resultados por: ' . $name);
     }
 
 }

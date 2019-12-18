@@ -53,7 +53,7 @@ Detalles del puesto:
 - Seguimiento de desarrollos';
 
         $jobOffer3->save();
-        $jobOffer3->employmentCategories()->sync([2, 4]); // array of role ids
+        $jobOffer3->employmentCategories()->sync([2]); // array of role ids
 
 
         $jobOffer2 = new JobOffer();
@@ -69,7 +69,7 @@ Incorporación inmediata con jornada completa.';
         $jobOffer2->status = 'active';
 
         $jobOffer2->save();
-        $jobOffer2->employmentCategories()->sync([2]); // array of role ids
+        $jobOffer2->employmentCategories()->sync([1]); // array of role ids
 
 
         $jobOffer4 = new JobOffer();
@@ -79,7 +79,7 @@ Incorporación inmediata con jornada completa.';
         $jobOffer4->status = 'active';
         $jobOffer4->description = 'En Jamenet Solutions buscamos un desarrollador Back end con experiencia con PHP y Symfony para incorporación inmediata a nuestro equipo de desarrollo en un proyecto estable ubicado en Bilbao. Imprescindible experiencia con GIT y trabajo en equipos de desarrollo.';
         $jobOffer4->save();
-        $jobOffer4->employmentCategories()->sync([4]); // array of role ids
+        $jobOffer4->employmentCategories()->sync([2]); // array of role ids
 
         $jobOffer5 = new JobOffer();
         $jobOffer5->name = 'Desarrollador Full-Stack';

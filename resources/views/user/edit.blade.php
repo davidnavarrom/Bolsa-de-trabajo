@@ -100,7 +100,7 @@
                             <label for="cv" class="col-md-4 col-form-label text-md-right">{{ __('Currículum vitae actual') }}</label>
                             <div class="col-md-6">
                                 <a class="btn btn-primary w-100"
-                                   href="{{ route('users.downloadcv', $user->cvpath)  }}" role="button">Descargar
+                                   href="{{ route('users.downloadcv', $user->cvpath)  }}" role="button"><i class="fa fa-download"></i> Descargar
                                     Currículum</a>
                             </div>
                         </div>
