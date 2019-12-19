@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\EmploymentCategory;
 use App\JobOffer;
 use Illuminate\Http\Request;
+use Illuminate\Queue\Jobs\Job;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -39,28 +41,46 @@ class HomeController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function search($category){
-
+    public function searchCategory($category){
         $categorySelected = EmploymentCategory::where('slug',$category)->first();
-
-
         $jobOffers = JobOffer::whereHas('employmentCategories', function($query) use($categorySelected){
             $query->where('categories_job.employment_categories_id','=', $categorySelected->id);
         })->latest()->paginate(5);
-
-
-
-//        $jobOffers = JobOffer::with('employmentCategories')
-//            ->join('categories_job','job_offers.id','=','categories_job.job_offers_id')
-//            ->join('employment_categories','categories_job.employment_categories_id','=','employment_categories.id')
-//            ->where('categories_job.employment_categories_id','=',$category->id)->paginate(5);
-//
-//
-//        dd($jobOffers);
-
         return view('welcome',compact('jobOffers','categorySelected'));
     }
 
+    public function search(Request $request){
 
+        $query = JobOffer::query();
+
+        if ($request->has('name')) {
+            $query->where('name', $request->name)->orWhere('name', 'like', '%' . $request->name . '%');
+        }
+
+        if ($request->has('categories')) {
+            $categories = EmploymentCategory::where('id', $request->categories)->first();
+            if(!is_null($categories)) {
+                $query->whereHas('employmentCategories', function ($query) use ($categories) {
+                    $query->where('categories_job.employment_categories_id', '=', $categories->id);
+                });
+            }
+        }
+
+        if ($request->has('type_working')) {
+            $typeworking = JobOffer::getPossibleTypeWorking();
+
+
+            if(array_key_exists($request->type_working,$typeworking)){
+
+                $query->where('type_working', $request->type_working);
+            }
+        }
+
+        $jobOffers = $query->latest()->paginate(5);
+//        dd($request);
+//        $categories = EmploymentCategory::all();
+//        $typeworking = JobOffer::getPossibleTypeWorking();
+        return view('welcome',compact('jobOffers'));
+    }
 
 }

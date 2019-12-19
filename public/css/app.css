@@ -14153,6 +14153,10 @@ a.text-dark:focus {
   clip: auto;
 }
 
+/*
+ * CARROUSEL
+ */
+
 .carousel .carousel-item {
   height: 300px;
 }
@@ -14163,6 +14167,10 @@ a.text-dark:focus {
   left: 0;
   min-height: 300px;
 }
+
+/*
+ * STATUS JOBS
+ */
 
 .jobactive {
   background-color: #38c172;
@@ -14175,6 +14183,10 @@ a.text-dark:focus {
 .jobfinished {
   background-color: #e3342f;
 }
+
+/*
+ * STATUS CANDIDATURES
+ */
 
 .candidatureselected {
   background-color: #38c172;

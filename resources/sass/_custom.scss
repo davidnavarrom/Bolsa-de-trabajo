@@ -1,3 +1,7 @@
+/*
+ * CARROUSEL
+ */
+
 .carousel .carousel-item {
     height: 300px;
 }
@@ -10,6 +14,9 @@
 }
 
 
+/*
+ * STATUS JOBS
+ */
 .jobactive{
      background-color: $green;
  }
@@ -22,6 +29,10 @@
     background-color: $red;
 }
 
+
+/*
+ * STATUS CANDIDATURES
+ */
 
 .candidatureselected{
     background-color: $green;

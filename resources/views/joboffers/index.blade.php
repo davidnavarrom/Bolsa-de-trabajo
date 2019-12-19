@@ -48,7 +48,6 @@
                         <div class="table-responsive">
                             <table class="table table-bordered">
                                 <tr>
-
                                     <th>Nombre</th>
                                     <th>Status</th>
                                     <th>Nª candidaturas</th>
@@ -57,9 +56,9 @@
                                 @foreach ($jobOffers as $joboffer)
                                     <tr>
 
-                                        <td>{{ $joboffer->name }}</td>
-                                        <td><span
-                                                class="badge badge-primary job{{$joboffer->getOriginal('status')}}">{{ $joboffer->status }}</span>
+                                        <td><a href="{{route('joboffers.show',$joboffer->id)}}">{{ $joboffer->name }}</a>
+
+                                        <td><span class="badge badge-primary job{{$joboffer->getOriginal('status')}}">{{ $joboffer->status }}</span>
                                         </td>
                                         <td>{{count($joboffer->candidatures)}}</td>
 
@@ -70,14 +69,21 @@
                                                     <i class="fa fa-cogs"></i>
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item" href="{{route('joboffers.show',$joboffer->id)}}">Visualizar</a>
+                                                    <a class="dropdown-item" href="{{route('joboffers.show',$joboffer->id)}}">Gestionar</a>
                                                     <a class="dropdown-item" href="{{route('joboffers.edit',$joboffer->id)}}">Editar</a>
-                                                    <form action="{{route('joboffers.destroy', $joboffer->id)}}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="dropdown-item">Desactivar</button>
+                                                    @if($joboffer->getOriginal('status') === \App\JobOffer::ACTIVE)
+                                                       <form action="{{route('joboffers.destroy', $joboffer->id)}}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="dropdown-item">Desactivar</button>
+                                                        </form>
+                                                    @else
+                                                        <form action="{{route('joboffers.active', $joboffer->id)}}" method="POST">
+                                                            @csrf
+                                                            <button type="submit" class="dropdown-item">Activar</button>
+                                                        </form>
+                                                    @endif
 
-                                                    </form>
                                                 </div>
                                             </div>
 

@@ -9,6 +9,7 @@
             </div>
 
         </div>
+
     </div>
 
     <div class="container">
@@ -19,12 +20,12 @@
                     <div class="card-body text-center">
                         @foreach ($categories as $category)
                             @if(empty($categorySelected))
-                                <a href="{{route('home.search',$category->slug)}}" class="btn btn-link">{{$category->name}}</a>
+                                <a href="{{route('home.searchcategory',$category->slug)}}" class="btn btn-link">{{$category->name}}</a>
                             @else
                                 @if($category->id == $categorySelected->id)
-                                <a href="{{route('home.search',$category->slug)}}" class="btn btn-link font-weight-bold">{{$category->name}}</a>
+                                <a href="{{route('home.searchcategory',$category->slug)}}" class="btn btn-link font-weight-bold">{{$category->name}}</a>
                                  @else
-                                    <a href="{{route('home.search',$category->slug)}}" class="btn btn-link">{{$category->name}}</a>
+                                    <a href="{{route('home.searchcategory',$category->slug)}}" class="btn btn-link">{{$category->name}}</a>
 
                                 @endif
                             @endif
@@ -89,7 +90,7 @@
             </div>
 
             <div class="col-md-4 pb-4">
-                <div class="card">
+                <div class="card mb-4">
                     <div class="card-header">Acerca de</div>
                     <div class="card-body">
                         <p>Bienvenido a la Bolsa de Empleo de I.E.S Comercio.
@@ -98,7 +99,48 @@
                     </div>
                 </div>
 
-                <div class="card mt-4">
+                <div class="card mb-4">
+                    <div class="card-header"><i class="fa fa-filter"></i> Filtro de búsqueda</div>
+                    <div class="card-body">
+
+
+                        <form action="{{route('home.search')}}" role="search" method="GET">
+                            <div class="form-group">
+                                <label for="searchInput" >Palabra clave</label>
+                                <input type="text" name="name" class="form-control input-sm" id="searchInput"
+                                       placeholder="Ej: Java">
+                            </div>
+                            <div class="form-group">
+                                <label for="category" >Categoria</label>
+                                <select class="form-control" id="categories" name="categories">
+                                    <option value="all" selected>Todas</option>
+                                @foreach($categories as  $key => $categorie)
+                                        <option value="{{$categorie->id }}" {{ (collect(old('categories'))->contains($categorie->id)) ? 'selected':'' }}>{{ $categorie->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="typeworking" >Jornada</label>
+                                <select class="form-control" id="type_working"  name="type_working">
+                                    <option value="all" selected>Todas</option>
+
+                                @foreach($typeworking as $key => $type)
+                                        <option value="{{$key}}" @if(old('type_working') == $key) {{ 'selected' }} @endif>{{ $type }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                            <label for="price" >Rango de precio</label>
+                                <input type="text" name="price" class="form-control input-sm" id="price"
+                                       placeholder="25.000">
+                            </div>
+                            <button type="submit" class="btn btn-xs fs-10 btn-bold btn-success btn-block"><i class="fa fa-search"></i> Buscar</button>
+                        </form>
+
+                    </div>
+                </div>
+
+                <div class="card mb-4">
                     <div class="card-header">Redes sociales</div>
                     <div class="card-body text-center">
                         <a class="btn btn-social-icon btn-twitter ">

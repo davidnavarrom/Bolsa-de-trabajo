@@ -11,10 +11,6 @@
 |
 */
 
-//Inicio
-Route::get('/', 'HomeController@index')->name('home');
-Route::get('/search/{category}','HomeController@search')->name('home.search');
-
 // Registro de usuarios
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('register', 'Auth\RegisterController@register');
@@ -28,7 +24,6 @@ Route::get('profile', 'UserController@show')->name('profile');
 Route::get('profile/{user}/edit', 'UserController@edit')->name('users.edit');
 Route::patch('profile/{user}/update',  'UserController@update')->name('users.update');
 Route::get('profile/download/{file}',  'UserController@downloadCv')->name('users.downloadcv');
-
 
 // Categorias
 //Route::resource('categories', 'EmploymentCategoryController');
@@ -49,11 +44,12 @@ Route::post('joboffers','JobOfferController@store')->name('joboffers.store');
 Route::get('joboffers/create','JobOfferController@create')->name('joboffers.create');
 Route::get('joboffers/search','JobOfferController@search')->name('joboffers.search');
 Route::delete('joboffers/{joboffer}','JobOfferController@destroy')->name('joboffers.destroy');
+Route::post('joboffers/{joboffer}','JobOfferController@active')->name('joboffers.active');
 Route::put('joboffers/{joboffer}','JobOfferController@update')->name('joboffers.update');
 Route::patch('joboffers/{joboffer}','JobOfferController@update')->name('joboffers.update');
 Route::get('joboffers/{joboffer}','JobOfferController@show')->name('joboffers.show');
 Route::get('joboffers/{joboffer}/edit','JobOfferController@edit')->name('joboffers.edit');
-
+Route::get('joboffers/{joboffer}/manage','JobOfferController@manage')->name('joboffers.manage');
 
 //Candidaturas
 //Route::resource('candidature', 'CandidatureController');
@@ -66,6 +62,10 @@ Route::patch('candidature/{candidature}','CandidatureController@update')->name('
 Route::get('candidature/{candidature}','CandidatureController@show')->name('candidature.show');
 Route::get('candidature/{candidature}/edit','CandidatureController@edit')->name('candidature.edit');
 
+//Inicio
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/search/','HomeController@search')->name('home.search');
+Route::get('/{category}','HomeController@searchCategory')->name('home.searchcategory');
 
 //403
 Route::get('unauthorized', function () {

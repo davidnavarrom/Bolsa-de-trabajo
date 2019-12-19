@@ -68,6 +68,21 @@ class JobOfferController extends Controller
         return view('joboffers.edit',compact('jobOffer','categories','typeworking'));
     }
 
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Employment_Category  $employment_Category
+     * @return \Illuminate\Http\Response
+     */
+    public function manage($id)
+    {
+        $jobOffer=JobOffer::with('candidatures')->with('employmentCategories')->find($id);
+        $categories = EmploymentCategory::all();
+        $typeworking = JobOffer::getPossibleTypeWorking();
+        return view('joboffers.manage',compact('jobOffer','categories','typeworking'));
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -101,6 +116,25 @@ class JobOfferController extends Controller
             abort(404);
         }
         return redirect()->route('joboffers.index')->with('success','Oferta de trabajo desactivada');
+    }
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Employment_Category  $employment_Category
+     * @return \Illuminate\Http\Response
+     */
+    public function active($id)
+    {
+        $jobOffer = JobOffer::find($id);
+        if ($jobOffer !== null) {
+            $jobOffer->status = JobOffer::ACTIVE;
+            $jobOffer->save();
+        }else{
+            abort(404);
+        }
+        return redirect()->route('joboffers.index')->with('success','Oferta de trabajo activada');
     }
 
     /**
