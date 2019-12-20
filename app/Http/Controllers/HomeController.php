@@ -76,6 +76,25 @@ class HomeController extends Controller
             }
         }
 
+        $minprice = 0;
+        $maxprice = 0;
+
+        if($request->has('minprice')){
+            if(!is_null($request->minprice)){
+                $minprice = $request->minprice;
+
+            }
+        }
+        if($request->has('maxprice')){
+            if(!is_null($request->maxprice)){
+                $maxprice = $request->maxprice;
+            }
+        }
+
+        if($minprice != 0 || $maxprice != 0) {
+            $query->whereBetween('salary', [$minprice, $maxprice]);
+        }
+
         $jobOffers = $query->latest()->paginate(5);
 //        dd($request);
 //        $categories = EmploymentCategory::all();

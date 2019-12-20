@@ -129,10 +129,17 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group">
-                            <label for="price" >Rango de precio</label>
-                                <input type="text" name="price" class="form-control input-sm" id="price"
-                                       placeholder="25.000">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="minprice">Salario Min</label>
+                                    <input type="number" name="minprice" class="form-control input-sm" id="minprice"
+                                           placeholder="0">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="maxprice">Salario Max</label>
+                                    <input type="number" name="maxprice" class="form-control input-sm" id="maxprice"
+                                           placeholder="0">
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-xs fs-10 btn-bold btn-success btn-block"><i class="fa fa-search"></i> Buscar</button>
                         </form>
