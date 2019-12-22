@@ -25,9 +25,14 @@
     "dependencies": {
         "and": "0.0.3",
         "bootstrap-social": "^5.1.1",
+        "bootstrap-vue": "^2.1.0",
+        "datatables": "^1.10.18",
+        "datatables-bootstrap": "0.0.1",
         "font-awesome": "^4.7.0",
+        "laravel-vue-pagination": "^2.3.1",
         "npm": "^6.13.4",
         "run": "^1.4.0",
-        "tinymce": "^5.1.5"
+        "tinymce": "^5.1.5",
+        "vue-resource": "^1.5.1"
     }
 }

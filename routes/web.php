@@ -59,10 +59,11 @@ Route::patch('joboffers/{joboffer}','JobOfferController@update')->name('joboffer
 Route::get('joboffers/{joboffer}','JobOfferController@show')->name('joboffers.show');
 Route::get('joboffers/{joboffer}/edit','JobOfferController@edit')->name('joboffers.edit');
 Route::get('joboffers/{joboffer}/manage','JobOfferController@manage')->name('joboffers.manage');
+Route::get('joboffers/{joboffer}/managecandidates','JobOfferController@managecandidates')->name('joboffers.managecandidates');
+
 
 //Candidaturas
 //Route::resource('candidature', 'CandidatureController');
-Route::get('candidature','CandidatureController@index')->name('candidature.index');
 Route::post('candidature','CandidatureController@store')->name('candidature.store');
 Route::get('candidature/create','CandidatureController@create')->name('candidature.create');
 Route::delete('candidature/{candidature}','CandidatureController@destroy')->name('candidature.destroy');

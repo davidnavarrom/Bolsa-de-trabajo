@@ -144,10 +144,19 @@ class JobOfferController extends Controller
             return view('joboffers.show',compact('jobOffer','candidature'));
     }
 
-    public function manage($id){
+    public function manage(Request $request, $id){
+
+
         $job_offer = JobOffer::where('id',$id)->firstOrFail();
         $candidates = Candidature::has('user')->with('user')->where('job_offers_id',$id)->latest()->paginate(10);
+
+        if($request->ajax()) {
+
+        return $candidates->toJSON();
+        }
+
         return view('joboffers.manage',compact('candidates','job_offer'));
+
     }
 
     public function search(Request $request){

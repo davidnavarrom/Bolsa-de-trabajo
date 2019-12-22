@@ -34,17 +34,26 @@ class CandidatureController extends Controller
 
     public function destroy($id)
     {
+
+
         $user = \Auth::user();
-        Candidature::findOrFail($id)->where('user_id',$user->id);
+        $candidature = Candidature::where('id' , '=' ,$id)->first();
+
+        $candidature->delete();
         return redirect()->back()->with('success','Candidatura cancelada correctamente');
     }
 
 
-    public function changestatus(Candidature $candidature,User $user, $status )
+    public function changestatus(Request $request,Candidature $candidature,User $user, $status )
     {
-        $candidature->status = $status;
-        $candidature->save();
-        return redirect()->back()->with('success','Estado modificado correctamente');
+        if($request->ajax()) {
+            $candidature->status = $status;
+            $candidature->save();
+        }else {
+            $candidature->status = $status;
+            $candidature->save();
+            return redirect()->back()->with('success', 'Estado modificado correctamente');
+        }
     }
 
 }
