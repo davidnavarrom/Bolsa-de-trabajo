@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Candidature;
 use App\JobOffer;
+use App\Mail\CandidaturaUsuario;
 use App\User;
 use Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
@@ -49,8 +51,7 @@ class UserController extends Controller
        // $candidatures = Candidature::where('user_id',\Auth::user()->id)->with('jobOffer')->latest()->paginate(5);
 
         $candidatures = Candidature::where('user_id',\Auth::user()->id)->with('jobOffer')->latest()->paginate(5);
-
-
+//        Mail::to('prueba@gmail.com')->send(new CandidaturaUsuario($user));
         return view('user.index',compact('user','candidatures'));
     }
 

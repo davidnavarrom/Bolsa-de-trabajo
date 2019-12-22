@@ -41,12 +41,17 @@ class HomeController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function searchCategory($category){
-        $categorySelected = EmploymentCategory::where('slug',$category)->first();
-        $jobOffers = JobOffer::whereHas('employmentCategories', function($query) use($categorySelected){
-            $query->where('categories_job.employment_categories_id','=', $categorySelected->id);
+    public function searchCategory($category)
+    {
+        $categorySelected = EmploymentCategory::where('slug', $category)->first();
+        if ($categorySelected) {
+        $jobOffers = JobOffer::whereHas('employmentCategories', function ($query) use ($categorySelected) {
+            $query->where('categories_job.employment_categories_id', '=', $categorySelected->id);
         })->latest()->paginate(5);
-        return view('welcome',compact('jobOffers','categorySelected'));
+        return view('welcome', compact('jobOffers', 'categorySelected'));
+        }else{
+            abort(404);
+        }
     }
 
     public function search(Request $request){

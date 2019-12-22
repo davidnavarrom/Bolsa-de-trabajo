@@ -25,6 +25,17 @@ class CandidaturesTableSeeder extends Seeder
         $candidature2->save();
 
 
+        $candidature2 = new Candidature();
+        $candidature2->status = 'pending';
+        $candidature2->user_id = 3;
+        $candidature2->job_offers_id = 4;
+        $candidature2->save();
+
+        $candidature2 = new Candidature();
+        $candidature2->status = 'pending';
+        $candidature2->user_id = 4;
+        $candidature2->job_offers_id = 4;
+        $candidature2->save();
 
     }
 }

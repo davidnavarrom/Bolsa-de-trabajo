@@ -32,20 +32,34 @@ class UserTableSeeder extends Seeder
         $user2->status=1;
         $user2->cvpath='ejemplo_cv_2.pdf';
         $user2->email='miguel@dnservices.es';
-        $user->roles()->attach(2,['user_id' => 2]);
+        $user2->roles()->attach(2,['user_id' => 2]);
         $user2->password = Hash::make('miguel123');
         $user2->save();
 
-        $user2 = new User();
-        $user2->name = 'Javier';
-        $user2->surname = 'Navarro Muerza';
-        $user2->phone = '654789800';
-        $user2->status=1;
-        $user2->cvpath='ejemplo_cv_2.pdf';
-        $user2->email='javier@dnservices.es';
-        $user->roles()->attach(2,['user_id' => 2]);
-        $user2->password = Hash::make('javier123');
-        $user2->save();
+        $user3 = new User();
+        $user3->name = 'Marta';
+        $user3->surname = 'Pérez Castillo';
+        $user3->phone = '678342356';
+        $user3->status=1;
+        $user3->cvpath='ejemplo_cv_3.pdf';
+        $user3->email='marta@dnservices.es';
+        $user3->roles()->attach(2,['user_id' => 3]);
+        $user3->password = Hash::make('marta123');
+        $user3->save();
+
+        $user4 = new User();
+        $user4->name = 'Cristina';
+        $user4->surname = 'Rodriguez Fuentes';
+        $user4->phone = '690789423';
+        $user4->status=1;
+        $user4->cvpath='ejemplo_cv_4.pdf';
+        $user4->email='cristina@dnservices.es';
+        $user4->roles()->attach(2,['user_id' => 4]);
+        $user4->password = Hash::make('cristina123');
+        $user4->save();
+
+
+
 
 
     }

@@ -30,7 +30,13 @@
                         </div>
 
                         <div class="d-block">
-                            <p >{{$jobOffer->description}}</p>
+                            <p >{!! nl2br(e($jobOffer->description)) !!}</p>
+                        </div>
+
+
+                        <div class="d-block">
+                            <p><span><b>{{count($jobOffer->candidatures)}} inscritos a esta oferta</td></b></span></p>
+                            <p class="small">Nuestro consejo: inscríbete si tienes el perfil, puede que se ajuste más que el de otros inscritos.</p>
                         </div>
 
 

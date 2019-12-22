@@ -62,9 +62,7 @@ class JobOffer extends Model
                 break;
             default:
                 return "";
-
         }
-
     }
 
     public static function getPossibleTypeWorking(){

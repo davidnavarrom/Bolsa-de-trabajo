@@ -44,7 +44,7 @@
                     <div class="card-header"><i class="fa fa-list"></i> Últimas ofertas de trabajo</div>
                     <div class="card-body">
 
-                        @foreach($jobOffers as $job_offer)
+                        @forelse($jobOffers as $job_offer)
 
                             <div class="card b-1 hover-shadow mb-5">
                                 <div class="media card-body">
@@ -83,7 +83,9 @@
                                     </div>
                                 </footer>
                             </div>
-                        @endforeach
+                            @empty
+                                <span>Vaya, no hemos encontrado ninguna oferta de trabajo.</span>
+                            @endforelse
                         {!! $jobOffers->links() !!}
                     </div>
                 </div>

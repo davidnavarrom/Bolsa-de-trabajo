@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Candidature;
 use App\EmploymentCategory;
 use App\JobOffer;
+use App\User;
 use Illuminate\Http\Request;
 use Symfony\Component\Console\Input\Input;
 
@@ -13,6 +14,7 @@ class JobOfferController extends Controller
     public function __construct() {
         $this->middleware('auth', ['except' => ['show']]);
         $this->middleware('role:admin', ['except' => ['show']]);
+
     }
 
     /**
@@ -42,8 +44,9 @@ class JobOfferController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
@@ -57,7 +60,7 @@ class JobOfferController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Employment_Category  $employment_Category
+     * @param $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -68,27 +71,13 @@ class JobOfferController extends Controller
         return view('joboffers.edit',compact('jobOffer','categories','typeworking'));
     }
 
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Employment_Category  $employment_Category
-     * @return \Illuminate\Http\Response
-     */
-    public function manage($id)
-    {
-        $jobOffer=JobOffer::with('candidatures')->with('employmentCategories')->find($id);
-        $categories = EmploymentCategory::all();
-        $typeworking = JobOffer::getPossibleTypeWorking();
-        return view('joboffers.manage',compact('jobOffer','categories','typeworking'));
-    }
-
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Employment_Category  $employment_Category
+     * @param \Illuminate\Http\Request $request
+     * @param $id
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request, $id)
     {
@@ -146,27 +135,25 @@ class JobOfferController extends Controller
     public function show($id)
     {
         $user = \Auth::user();
-
-            $jobOffer = JobOffer::find($id);
+            $jobOffer = JobOffer::with('candidatures')->findOrFail($id);
             $candidature = null;
             if($user) {
                 $matchThese = ['user_id' => $user->id, 'job_offers_id' => $jobOffer->id];
                 $candidature = Candidature::where($matchThese)->first();;
             }
             return view('joboffers.show',compact('jobOffer','candidature'));
-
-
     }
 
+    public function manage($id){
+        $job_offer = JobOffer::where('id',$id)->firstOrFail();
+        $candidates = Candidature::has('user')->with('user')->where('job_offers_id',$id)->latest()->paginate(10);
+        return view('joboffers.manage',compact('candidates','job_offer'));
+    }
 
     public function search(Request $request){
-
         $name = $request->name;
-
         $jobOffers = JobOffer::with('candidatures')->where('name', $name)
             ->orWhere('name', 'like', '%' . $name . '%')->latest()->paginate(5);
-
-
         return view('joboffers.index',compact('jobOffers'))->with('searched','Buscando resultados por: ' . $name);
     }
 

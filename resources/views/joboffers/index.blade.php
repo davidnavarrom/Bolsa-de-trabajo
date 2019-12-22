@@ -69,7 +69,7 @@
                                                     <i class="fa fa-cogs"></i>
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item" href="{{route('joboffers.show',$joboffer->id)}}">Gestionar</a>
+                                                    <a class="dropdown-item" href="{{route('joboffers.manage',$joboffer->id)}}">Gestionar</a>
                                                     <a class="dropdown-item" href="{{route('joboffers.edit',$joboffer->id)}}">Editar</a>
                                                     @if($joboffer->getOriginal('status') === \App\JobOffer::ACTIVE)
                                                        <form action="{{route('joboffers.destroy', $joboffer->id)}}" method="POST">

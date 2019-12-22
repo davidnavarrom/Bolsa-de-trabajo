@@ -19,8 +19,13 @@ class Candidature extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User','user_id','id');
     }
+
+//    public function users()
+//    {
+//        return $this->belongsToMany(User::class, 'user_beers_data', 'beer_id', 'user_id');
+//    }
 
     public function getStatusAttribute($value) {
         switch($value){

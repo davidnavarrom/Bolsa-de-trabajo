@@ -10,6 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//403
+Route::get('unauthorized', function () {
+    return view('unauthorized');
+})->name('unauthorized');
+
+
+Route::fallback(function () {
+    return "No permitido";
+});
 
 // Registro de usuarios
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
@@ -61,18 +70,11 @@ Route::put('candidature/{candidature}','CandidatureController@update')->name('ca
 Route::patch('candidature/{candidature}','CandidatureController@update')->name('candidature.update');
 Route::get('candidature/{candidature}','CandidatureController@show')->name('candidature.show');
 Route::get('candidature/{candidature}/edit','CandidatureController@edit')->name('candidature.edit');
+Route::patch('candidature/{candidature}/{user}/{status}','CandidatureController@changestatus')->name('candidature.changestatus');
 
 //Inicio
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/search/','HomeController@search')->name('home.search');
 Route::get('/{category}','HomeController@searchCategory')->name('home.searchcategory');
 
-//403
-Route::get('unauthorized', function () {
-    return view('unauthorized');
-})->name('unauthorized');
 
-
-Route::fallback(function () {
-    return "No permitido";
-});

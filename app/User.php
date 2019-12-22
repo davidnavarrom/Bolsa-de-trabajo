@@ -37,9 +37,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function candidatures()
-    {
-        return $this->hasMany('App\Candidature','user_id');
+    public function candidatures() {
+        return $this->hasMany('App\Candidature','user_id','id');
     }
 
     public function roles()
@@ -52,6 +51,7 @@ class User extends Authenticatable
         abort_unless($this->hasAnyRole($roles), 401);
         return true;
     }
+
 
     public function hasAnyRole($roles)
     {
