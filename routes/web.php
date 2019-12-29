@@ -54,6 +54,7 @@ Route::get('joboffers/create','JobOfferController@create')->name('joboffers.crea
 Route::get('joboffers/search','JobOfferController@search')->name('joboffers.search');
 Route::delete('joboffers/{joboffer}','JobOfferController@destroy')->name('joboffers.destroy');
 Route::post('joboffers/{joboffer}','JobOfferController@active')->name('joboffers.active');
+Route::post('joboffers/{joboffer}/change-status','JobOfferController@changestatus')->name('joboffers.changestatus');
 Route::put('joboffers/{joboffer}','JobOfferController@update')->name('joboffers.update');
 Route::patch('joboffers/{joboffer}','JobOfferController@update')->name('joboffers.update');
 Route::get('joboffers/{joboffer}','JobOfferController@show')->name('joboffers.show');

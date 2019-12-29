@@ -22,7 +22,20 @@
                 <div class="card b-1 hover-shadow">
                     <div class="card-header">
                         <div class="row align-items-center">
-                            <div class="col">Información oferta de trabajo</div>
+                            <div class="col">Información oferta de empleo</div>
+                            @if($job_offer->getOriginal('status') !== 'finished')
+                             <form method="POST" action="{{ route('joboffers.changestatus', $job_offer->id) }}">
+                                @csrf
+                                <input name="status" type="hidden" value="finished">
+                                <button type="submit" class="btn btn-danger">
+                                     Finalizar oferta de empleo
+                                </button>
+                            </form>
+                                @else
+                                <button type="submit" class="btn btn-dark">
+                                    Oferta de empleo finalizada
+                                </button>
+                            @endif
                         </div>
                     </div>
                     <div class="media card-body">
@@ -44,13 +57,12 @@
                                 class="fs-16 fw-300 ls-1">{{str_limit($job_offer->description, $limit = 350, $end = '...')}}</small>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-                <table-candidates url="{{route('joboffers.manage', $job_offer->id)}}"></table-candidates>
+                <table-candidates :job_offer="{{$job_offer}}" url="{{route('joboffers.manage', $job_offer->id)}}"></table-candidates>
             </div>
         </div>
     </div>

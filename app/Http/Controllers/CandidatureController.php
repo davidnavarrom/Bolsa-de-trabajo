@@ -29,16 +29,14 @@ class CandidatureController extends Controller
         }else{
             abort(404);
         }
-        return redirect()->back()->with('success','Candidatura realizada correctamente');
+        return redirect()->back()->with('success','Candidatura presentada correctamente');
     }
 
     public function destroy($id)
     {
 
-
         $user = \Auth::user();
         $candidature = Candidature::where('id' , '=' ,$id)->first();
-
         $candidature->delete();
         return redirect()->back()->with('success','Candidatura cancelada correctamente');
     }

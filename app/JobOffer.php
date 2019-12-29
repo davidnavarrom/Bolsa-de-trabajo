@@ -16,8 +16,14 @@ class JobOffer extends Model
     const DISABLED = "disabled";
     const FINISHED = "finished";
 
+    protected $appends = ['originalstatus'];
+
+    public function getOriginalStatusAttribute() {
+        return $this->getOriginal('status');
+    }
+
     protected $fillable = [
-        'name', 'description','salary','type_working',
+        'name', 'description','salary','type_working','status',
     ];
 
     public function employmentCategories() {
@@ -49,7 +55,7 @@ class JobOffer extends Model
 
     }
 
-    public function getStatusAttribute($value) {
+    public static function getStatusAttribute($value) {
         switch($value){
             case JobOffer::ACTIVE:
                 return "Activa";
@@ -77,6 +83,21 @@ class JobOffer extends Model
         }
         return $values;
     }
+
+
+    public static function getPossibleStatus(){
+        $type = DB::select(DB::raw('SHOW COLUMNS FROM job_offers WHERE Field = "status"'))[0]->Type;
+        preg_match('/^enum\((.*)\)$/', $type, $matches);
+
+        $values = array();
+        foreach(explode(',', $matches[1]) as $value){
+            $value  = trim($value, "'");
+            $valueed = self::getStatusAttribute($value);
+            $values[$value] = $valueed;
+        }
+        return $values;
+    }
+
 
     public function scopeWithAndWhereHas($query, $relation, $constraint){
         return $query->whereHas($relation, $constraint)

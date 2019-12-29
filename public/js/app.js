@@ -1944,8 +1944,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['url'],
+  props: ['url', 'job_offer'],
   mounted: function mounted() {
     this.getCandidates();
   },
@@ -1979,6 +1993,13 @@ __webpack_require__.r(__webpack_exports__);
       axios.patch('/candidature/' + candidature + '/' + user + '/' + status).then(function (response) {
         _this2.getCandidates();
       });
+    },
+    isFinished: function isFinished() {
+      if (this.job_offer.originalstatus === 'finished') {
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 });
@@ -67921,7 +67942,7 @@ var render = function() {
                           (_obj[
                             "badge badge-primary " +
                               "candidature" +
-                              candidate.status
+                              candidate.originalstatus
                           ] = true),
                           _obj)
                       },
@@ -67944,100 +67965,213 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("td", [
-                    _c(
-                      "div",
-                      [
-                        _c(
-                          "b-dropdown",
-                          {
-                            attrs: { id: "dropdown-1" },
-                            scopedSlots: _vm._u(
-                              [
-                                {
-                                  key: "button-content",
-                                  fn: function() {
-                                    return [
-                                      _c("i", { staticClass: "fa fa-cogs" })
-                                    ]
-                                  },
-                                  proxy: true
-                                }
-                              ],
-                              null,
-                              true
-                            )
-                          },
+                    !_vm.isFinished()
+                      ? _c(
+                          "div",
                           [
-                            _vm._v(" "),
-                            _c("b-dropdown-item", [
-                              _c(
-                                "form",
-                                { attrs: { method: "POST", action: "#" } },
-                                [
-                                  _c("input", {
-                                    attrs: { type: "hidden", name: "_token" },
-                                    domProps: { value: _vm.csrf }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "button",
+                            _c(
+                              "b-dropdown",
+                              {
+                                attrs: { id: "dropdown-1" },
+                                scopedSlots: _vm._u(
+                                  [
                                     {
-                                      staticClass: "dropdown-item",
-                                      attrs: { type: "submit" },
-                                      on: {
-                                        click: function($event) {
-                                          $event.preventDefault()
-                                          return _vm.updateinfo(
-                                            candidate.id,
-                                            candidate.user.id,
-                                            "selected"
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_vm._v("Seleccionar candidatura")]
-                                  )
-                                ]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("b-dropdown-item", [
-                              _c(
-                                "form",
-                                { attrs: { method: "POST", action: "#" } },
-                                [
-                                  _c("input", {
-                                    attrs: { type: "hidden", name: "_token" },
-                                    domProps: { value: _vm.csrf }
-                                  }),
-                                  _vm._v(" "),
+                                      key: "button-content",
+                                      fn: function() {
+                                        return [
+                                          _c("i", { staticClass: "fa fa-cogs" })
+                                        ]
+                                      },
+                                      proxy: true
+                                    }
+                                  ],
+                                  null,
+                                  true
+                                )
+                              },
+                              [
+                                _vm._v(" "),
+                                _c("b-dropdown-item", [
                                   _c(
-                                    "button",
-                                    {
-                                      staticClass: "dropdown-item",
-                                      attrs: { type: "submit" },
-                                      on: {
-                                        click: function($event) {
-                                          $event.preventDefault()
-                                          return _vm.updateinfo(
-                                            candidate.id,
-                                            candidate.user.id,
-                                            "notselected"
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_vm._v("Eliminar candidatura")]
+                                    "form",
+                                    { attrs: { method: "POST", action: "#" } },
+                                    [
+                                      _c("input", {
+                                        attrs: {
+                                          type: "hidden",
+                                          name: "_token"
+                                        },
+                                        domProps: { value: _vm.csrf }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "dropdown-item",
+                                          attrs: { type: "submit" },
+                                          on: {
+                                            click: function($event) {
+                                              $event.preventDefault()
+                                              return _vm.updateinfo(
+                                                candidate.id,
+                                                candidate.user.id,
+                                                "selected"
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Seleccionar candidatura")]
+                                      )
+                                    ]
                                   )
-                                ]
-                              )
-                            ])
+                                ]),
+                                _vm._v(" "),
+                                _c("b-dropdown-item", [
+                                  _c(
+                                    "form",
+                                    { attrs: { method: "POST", action: "#" } },
+                                    [
+                                      _c("input", {
+                                        attrs: {
+                                          type: "hidden",
+                                          name: "_token"
+                                        },
+                                        domProps: { value: _vm.csrf }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "dropdown-item",
+                                          attrs: { type: "submit" },
+                                          on: {
+                                            click: function($event) {
+                                              $event.preventDefault()
+                                              return _vm.updateinfo(
+                                                candidate.id,
+                                                candidate.user.id,
+                                                "notselected"
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Eliminar candidatura")]
+                                      )
+                                    ]
+                                  )
+                                ])
+                              ],
+                              1
+                            )
                           ],
                           1
                         )
-                      ],
-                      1
-                    )
+                      : _c(
+                          "div",
+                          [
+                            _c(
+                              "b-dropdown",
+                              {
+                                attrs: { id: "dropdown-1" },
+                                scopedSlots: _vm._u(
+                                  [
+                                    {
+                                      key: "button-content",
+                                      fn: function() {
+                                        return [
+                                          _c("i", { staticClass: "fa fa-cogs" })
+                                        ]
+                                      },
+                                      proxy: true
+                                    }
+                                  ],
+                                  null,
+                                  true
+                                )
+                              },
+                              [
+                                _vm._v(" "),
+                                _c("b-dropdown-item", [
+                                  _c(
+                                    "form",
+                                    { attrs: { method: "POST", action: "#" } },
+                                    [
+                                      _c("input", {
+                                        attrs: {
+                                          type: "hidden",
+                                          name: "_token"
+                                        },
+                                        domProps: { value: _vm.csrf }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "dropdown-item",
+                                          attrs: {
+                                            type: "submit",
+                                            disabled: ""
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              $event.preventDefault()
+                                              return _vm.updateinfo(
+                                                candidate.id,
+                                                candidate.user.id,
+                                                "selected"
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Seleccionar candidatura")]
+                                      )
+                                    ]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("b-dropdown-item", [
+                                  _c(
+                                    "form",
+                                    { attrs: { method: "POST", action: "#" } },
+                                    [
+                                      _c("input", {
+                                        attrs: {
+                                          type: "hidden",
+                                          name: "_token"
+                                        },
+                                        domProps: { value: _vm.csrf }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "dropdown-item",
+                                          attrs: {
+                                            type: "submit",
+                                            disabled: ""
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              $event.preventDefault()
+                                              return _vm.updateinfo(
+                                                candidate.id,
+                                                candidate.user.id,
+                                                "notselected"
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Eliminar candidatura")]
+                                      )
+                                    ]
+                                  )
+                                ])
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
                   ])
                 ])
               }),

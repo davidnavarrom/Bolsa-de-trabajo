@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Candidature extends Model
 {
+    protected $appends = ['originalstatus'];
 
     const PENDING = "pending";
     const SELECTED = "selected";
@@ -26,6 +27,13 @@ class Candidature extends Model
 //    {
 //        return $this->belongsToMany(User::class, 'user_beers_data', 'beer_id', 'user_id');
 //    }
+
+
+
+
+    public function getOriginalStatusAttribute() {
+        return $this->getOriginal('status');
+    }
 
     public function getStatusAttribute($value) {
         switch($value){

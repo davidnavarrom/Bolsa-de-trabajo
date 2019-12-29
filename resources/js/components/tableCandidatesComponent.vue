@@ -1,10 +1,8 @@
 <template>
     <div class="card">
     <div class="card-header">
-
         <div class="row align-items-center">
             <div class="col">Listado de candidatos</div>
-
             <div v-if="loading">
             <button class="btn btn-primary text-nowrap btn-sm" type="button">
                 <span class="spinner-border spinner-border-sm mr-2"></span>
@@ -12,7 +10,6 @@
             </button>
             </div>
             <div v-if="!loading">
-
             </div>
             </div>
 
@@ -39,11 +36,11 @@
                 <td>{{candidate.user.surname}}</td>
                 <td>{{candidate.user.email}}</td>
                 <td>{{candidate.user.phone}}</td>
-                <td style="width: 12%"><span  :class="{['badge badge-primary ' + 'candidature'+candidate.status]:true}" >{{ candidate.status }}</span></td>
+                <td style="width: 12%"><span  :class="{['badge badge-primary ' + 'candidature'+candidate.originalstatus]:true}" >{{ candidate.status }}</span></td>
                 <td><a class="btn btn-primary w-100" :href="'/profile/download/'+ candidate.user.cvpath" role="button"><i class="fa fa-download"></i> </a></td>
             <td>
-                    <div>
-                        <b-dropdown id="dropdown-1" >
+                    <div v-if="!isFinished()">
+                        <b-dropdown id="dropdown-1">
                             <template v-slot:button-content>
                                 <i class='fa fa-cogs'></i>
                             </template>
@@ -54,11 +51,28 @@
                             <b-dropdown-item><form method="POST" action="#">
                                 <input type="hidden" name="_token" :value="csrf">
 
-                                <button type="submit" @click.prevent="updateinfo(candidate.id,candidate.user.id,'notselected')" class="dropdown-item">Eliminar candidatura</button>
+                                <button type="submit"  @click.prevent="updateinfo(candidate.id,candidate.user.id,'notselected')" class="dropdown-item">Eliminar candidatura</button>
                             </form></b-dropdown-item>
+
                         </b-dropdown>
                     </div>
 
+                <div v-else>
+                    <b-dropdown id="dropdown-1">
+                        <template v-slot:button-content>
+                            <i class='fa fa-cogs'></i>
+                        </template>
+                        <b-dropdown-item><form method="POST" action="#">
+                            <input type="hidden" name="_token" :value="csrf">
+                            <button type="submit" disabled @click.prevent="updateinfo(candidate.id,candidate.user.id,'selected')" class="dropdown-item">Seleccionar candidatura</button>
+                        </form></b-dropdown-item>
+                        <b-dropdown-item><form method="POST" action="#">
+                            <input type="hidden" name="_token" :value="csrf">
+
+                            <button type="submit" disabled @click.prevent="updateinfo(candidate.id,candidate.user.id,'notselected')" class="dropdown-item">Eliminar candidatura</button>
+                        </form></b-dropdown-item>
+                    </b-dropdown>
+                </div>
             </td>
             </tr>
 
@@ -74,7 +88,7 @@
 <script>
     export default {
 
-        props: ['url'],
+        props: ['url','job_offer'],
         mounted:function() {
                 this.getCandidates();
         },
@@ -107,6 +121,13 @@
                 axios.patch('/candidature/' + candidature + '/' +user+ '/' + status).then(response=>{
                     this.getCandidates();
                 });
+            },
+            isFinished(){
+                if(this.job_offer.originalstatus === 'finished'){
+                    return true;
+                }else{
+                    return false;
+                }
             },
         }
     }

@@ -71,23 +71,8 @@
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item" href="{{route('joboffers.manage',$joboffer->id)}}">Gestionar</a>
                                                     <a class="dropdown-item" href="{{route('joboffers.edit',$joboffer->id)}}">Editar</a>
-                                                    @if($joboffer->getOriginal('status') === \App\JobOffer::ACTIVE)
-                                                       <form action="{{route('joboffers.destroy', $joboffer->id)}}" method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="dropdown-item">Desactivar</button>
-                                                        </form>
-                                                    @else
-                                                        <form action="{{route('joboffers.active', $joboffer->id)}}" method="POST">
-                                                            @csrf
-                                                            <button type="submit" class="dropdown-item">Activar</button>
-                                                        </form>
-                                                    @endif
-
                                                 </div>
                                             </div>
-
-
                                         </td>
                                     </tr>
                                 @endforeach

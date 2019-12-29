@@ -82,6 +82,22 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="status" class="col-md-4 col-form-label text-md-right">{{ __('Estado') }}</label>
+                                <div class="col-md-6 ">
+                                    <select class="form-control" id="status" name="status" >
+                                        @foreach($status as $key => $type)
+                                            <option value="{{$key}}" @if(old('status', $jobOffer->getOriginal('status')) === $key) {{ 'selected' }} @endif>{{ $type }}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="@error('status') is-invalid @enderror"></div>
+                                    @error('status')
+                                    <span class="invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">

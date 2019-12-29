@@ -38,7 +38,10 @@ class JobOfferController extends Controller
     {
         $categories = EmploymentCategory::all();
         $typeworking = JobOffer::getPossibleTypeWorking();
-        return view('joboffers.create',compact('categories','typeworking'));
+        $status = JobOffer::getPossibleStatus();
+
+
+        return view('joboffers.create',compact('categories','typeworking','status'));
     }
 
     /**
@@ -50,7 +53,7 @@ class JobOfferController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[ 'name'=>'required', 'description' =>'required', 'type_working' =>'required|in:'.JobOffer::COMPLETE.','.JobOffer::PART, 'salary' => 'required|numeric']);
+        $this->validate($request,[ 'name'=>'required', 'description' =>'required', 'type_working' =>'required|in:'.JobOffer::COMPLETE.','.JobOffer::PART,'status' =>'required|in:'.JobOffer::FINISHED.','.JobOffer::ACTIVE.','.JobOffer::DISABLED, 'salary' => 'required|numeric']);
         $newJobOffer = JobOffer::create($request->all());
         $categories = $request->input('categories');
         $newJobOffer->employmentCategories()->sync($categories); // array of role ids
@@ -68,7 +71,8 @@ class JobOfferController extends Controller
         $jobOffer=JobOffer::with('employmentCategories')->find($id);
         $categories = EmploymentCategory::all();
         $typeworking = JobOffer::getPossibleTypeWorking();
-        return view('joboffers.edit',compact('jobOffer','categories','typeworking'));
+        $status = JobOffer::getPossibleStatus();
+        return view('joboffers.edit',compact('jobOffer','categories','typeworking','status'));
     }
 
     /**
@@ -82,11 +86,20 @@ class JobOfferController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,[ 'name'=>'required', 'description' =>'required', 'type_working' =>'required|in:'.JobOffer::COMPLETE.','. JobOffer::PART, 'salary' => 'required|numeric']);
-        $jobOffer = JobOffer::find($id);
+        $jobOffer = JobOffer::findOrFail($id);
         $jobOffer->update($request->all());
         $categories = $request->input('categories');
         $jobOffer->employmentCategories()->sync($categories); // array of role ids
-        return redirect()->route('joboffers.index')->with('success','Oferta de de empleo actualizada');
+        return redirect()->route('joboffers.index')->with('success','Oferta de empleo actualizada');
+    }
+
+
+    public function changestatus(Request $request, $id)
+    {
+        $jobOffer = JobOffer::findOrFail($id);
+        $jobOffer->status = $request->status;
+        $jobOffer->save();
+        return redirect()->route('joboffers.index')->with('success','Oferta de empleo actualizada');
     }
 
     /**
@@ -104,8 +117,13 @@ class JobOfferController extends Controller
         }else{
             abort(404);
         }
-        return redirect()->route('joboffers.index')->with('success','Oferta de trabajo desactivada');
+        return redirect()->route('joboffers.index')->with('success','Oferta de empleo desactivada');
     }
+
+
+
+
+
 
 
     /**
@@ -123,7 +141,7 @@ class JobOfferController extends Controller
         }else{
             abort(404);
         }
-        return redirect()->route('joboffers.index')->with('success','Oferta de trabajo activada');
+        return redirect()->route('joboffers.index')->with('success','Oferta de empleo activada');
     }
 
     /**
@@ -145,16 +163,11 @@ class JobOfferController extends Controller
     }
 
     public function manage(Request $request, $id){
-
-
         $job_offer = JobOffer::where('id',$id)->firstOrFail();
         $candidates = Candidature::has('user')->with('user')->where('job_offers_id',$id)->latest()->paginate(10);
-
         if($request->ajax()) {
-
         return $candidates->toJSON();
         }
-
         return view('joboffers.manage',compact('candidates','job_offer'));
 
     }

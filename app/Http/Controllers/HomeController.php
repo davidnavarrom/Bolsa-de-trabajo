@@ -100,6 +100,9 @@ class HomeController extends Controller
             $query->whereBetween('salary', [$minprice, $maxprice]);
         }
 
+
+        $query->where('status', 'active');
+
         $jobOffers = $query->latest()->paginate(5);
 //        dd($request);
 //        $categories = EmploymentCategory::all();
