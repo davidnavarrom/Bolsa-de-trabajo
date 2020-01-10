@@ -20,7 +20,7 @@ class PivotJobOffersCategories extends Migration
             $table->BigInteger('employment_categories_id')->unsigned();
 
             $table->foreign('job_offers_id')->references('id')->on('job_offers')->onDelete('cascade');;
-            $table->foreign('employment_categories_id')->references('id')->on('employment_categories')->onDelete('cascade');;
+            $table->foreign('employment_categories_id')->references('id')->on('employment_categories')->onDelete('cascade');
         });
     }
 

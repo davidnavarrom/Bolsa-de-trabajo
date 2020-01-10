@@ -21,8 +21,9 @@ class UserTableSeeder extends Seeder
         $user->email='david@dnservices.es';
         $user->cvpath='ejemplo_cv.pdf';
         $user->password = Hash::make('david123');
-        $user->roles()->attach(1,['user_id' => 1]);
         $user->save();
+
+        $user->roles()->attach(1);
 
 
         $user2 = new User();
@@ -32,9 +33,12 @@ class UserTableSeeder extends Seeder
         $user2->status=1;
         $user2->cvpath='ejemplo_cv_2.pdf';
         $user2->email='miguel@dnservices.es';
-        $user2->roles()->attach(2,['user_id' => 2]);
+        //$user2->roles()->sync(['user_id' => 2]);
         $user2->password = Hash::make('miguel123');
         $user2->save();
+
+        $user2->roles()->attach(2);
+
 
         $user3 = new User();
         $user3->name = 'Marta';
@@ -43,9 +47,10 @@ class UserTableSeeder extends Seeder
         $user3->status=1;
         $user3->cvpath='ejemplo_cv_3.pdf';
         $user3->email='marta@dnservices.es';
-        $user3->roles()->attach(2,['user_id' => 3]);
+        //$user3->roles()->sync(['user_id' => 3]);
         $user3->password = Hash::make('marta123');
         $user3->save();
+        $user3->roles()->attach(2);
 
         $user4 = new User();
         $user4->name = 'Cristina';
@@ -54,9 +59,10 @@ class UserTableSeeder extends Seeder
         $user4->status=1;
         $user4->cvpath='ejemplo_cv_4.pdf';
         $user4->email='cristina@dnservices.es';
-        $user4->roles()->attach(2,['user_id' => 4]);
+        //$user4->roles()->sync(['user_id' => 4]);
         $user4->password = Hash::make('cristina123');
         $user4->save();
+        $user4->roles()->attach(2);
 
 
 

@@ -14,7 +14,7 @@ class UpdateCandidaturesPk extends Migration
     public function up()
     {
         Schema::table('candidatures', function (Blueprint $table) {
-            $table->unique(['user_id','job_offers_id'])->change();  // Changing from int to float, ie.
+            $table->unique(['user_id','job_offers_id'])->change();
 
         });
     }

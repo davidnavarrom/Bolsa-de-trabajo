@@ -56,8 +56,8 @@ class RegisterController extends Controller
             'phone' => ['required', 'numeric', 'min:9'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'cv' => ['required','max:30000','mimes:pdf,doc,docx'],
-            'checklicense' => ['required'],
+            'cv' => ['required','mimes:pdf,doc,docx'],
+//            'checklicense' => ['required'],
         ]);
     }
 
@@ -85,7 +85,9 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        $user->roles()->attach(2,['user_id' => $user->id]);
+
+
+        $user->roles()->attach(2);
 
         return $user;
     }

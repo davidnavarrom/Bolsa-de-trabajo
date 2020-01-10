@@ -31,13 +31,23 @@
                                             <div>
                                                     <span><b>Status: </b></span><span class="badge badge-primary candidature{{$candidature->getOriginal('status')}}">{{ $candidature->status }}</span></td>
                                             </div>
-                                            <div>
-                                                <form action="{{route('candidature.destroy', $candidature->id)}}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                    <button type="submit" class="btn btn-xs fs-10 btn-bold btn-danger"><i class="fa fa-times"></i> Cancelar candidatura</button>
-                                                </form>
-                                            </div>
+                                            @if($candidature->jobOffer->getOriginal('status') !== \App\JobOffer::ACTIVE || $candidature->getOriginal('status') !== \App\Candidature::PENDING)
+                                                <div>
+                                                    <button type="submit" class="btn btn-dark">
+                                                        Oferta de empleo finalizada
+                                                    </button>
+                                                </div>
+                                            @else
+                                                <div>
+                                                    <form action="{{route('candidature.destroy', $candidature->id)}}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-xs fs-10 btn-bold btn-danger"><i class="fa fa-times"></i> Cancelar candidatura</button>
+                                                    </form>
+                                                </div>
+                                            @endif
+
+
                                         </div>
                                     </div>
                                 </footer>
