@@ -1,4 +1,4 @@
-<h1> MANUAL INSTALACIÓN PROYECTO <H1>
+Manual instalación proyecto
 
 1. Clonar proyecto repositorio GitHub
 
