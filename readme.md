@@ -12,30 +12,30 @@
 
 3. Configurar VirtualHost:
 
-XAMPP
-    
+   XAMPP
+
    a) Editar D:\xampp\apache\conf\extra\httpd-vhosts y añadir lo siguiente:
-   
-   ```
-   <VirtualHost *:80>
-    DocumentRoot "D:\xampp\htdocs"
-    ServerName localhost
-   </VirtualHost>
-  
-   <VirtualHost *:80>
-    DocumentRoot "D:/xampp/htdocs/bolsadetrabajo-master/public"
-    ServerName bolsadetrabajo.com
-    </VirtualHost>
-   ```
-   
- b) Editar  C:\Windows\System32\drivers\etc\hosts
-   
-   ```
-   127.0.0.1 localhost
-   127.0.0.1 bolsadetrabajo.com
-   ```
-   
- c) reiniciar XAMPP
+
+       ```
+       <VirtualHost *:80>
+        DocumentRoot "D:\xampp\htdocs"
+        ServerName localhost
+       </VirtualHost>
+
+       <VirtualHost *:80>
+        DocumentRoot "D:/xampp/htdocs/bolsadetrabajo-master/public"
+        ServerName bolsadetrabajo.com
+        </VirtualHost>
+       ```
+
+   b) Editar  C:\Windows\System32\drivers\etc\hosts
+
+       ```
+       127.0.0.1 localhost
+       127.0.0.1 bolsadetrabajo.com
+       ```
+
+   c) reiniciar XAMPP
    
 
 4. Acceder al directorio del proyecto e Instalar dependencias proyecto 
