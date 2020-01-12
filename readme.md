@@ -7,14 +7,38 @@
 2. Comprobar permisos de escritura
 
    ```
-   sudo chmod -R 755 storage
+   chmod -R 755 
    ```
 
-3. Acceder al directorio del proyecto:
+3. Configurar VirtualHost:
 
+XAMPP
+    
+   a) Editar D:\xampp\apache\conf\extra\httpd-vhosts y añadir lo siguiente:
+   
+   ```
+   <VirtualHost *:80>
+    DocumentRoot "D:\xampp\htdocs"
+    ServerName localhost
+   </VirtualHost>
+  
+   <VirtualHost *:80>
+    DocumentRoot "D:/xampp/htdocs/bolsadetrabajo-master/public"
+    ServerName bolsadetrabajo.com
+    </VirtualHost>
+   ```
+   
+ b) Editar  C:\Windows\System32\drivers\etc\hosts
+   
+   ```
+   127.0.0.1 localhost
+   127.0.0.1 bolsadetrabajo.com
+   ```
+   
+ c) reiniciar XAMPP
    
 
-4. Instalar dependencias proyecto 
+4. Acceder al directorio del proyecto e Instalar dependencias proyecto 
 
    ```
    $ composer install
@@ -24,14 +48,16 @@
 
 5. Crear Base de datos desde MYSQL
 
+   Atención, si tu versión MYSQL es inferior a la versión 5.7.7 deberás ir a App/Providers/AppServiceProvider y descomentar la linea 33
+   Cotejamiento: utf8mb4
+
    ```
    $ CREATE DATABASE tu_base_de_datos;
    ```
 
-6. Modificar archivo .env
+6. Copiar archivo .env-example y renombar a .env y modificar las siguientes lineas
 
    ```
-   PHP
    DB_HOST=localhost
    DB_DATABASE=tu_base_de_datos
    DB_USERNAME=root
@@ -63,3 +89,5 @@
    
    npm run dev/production
    ```
+   
+10. Abrir navegador y acceder a bolsadetrabajo.com
