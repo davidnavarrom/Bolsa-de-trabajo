@@ -27,6 +27,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
 
+        /**
+         * SI VAS A UTILIZAR XAMPP Y UNA VERSIÓN MYSQL IGUAL O INFERIOR  A LA  5.7.7 DESCOMENTA ESTA LINEA
+         */
+        //Schema::defaultStringLength(191);
 
     }
 }
