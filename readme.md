@@ -1,4 +1,4 @@
-[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)]([https://www.buymeacoffee.com/dnavarrom](https://buymeacoffee.com/dnavarrom))
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/dnavarrom){:target="_blank"}
 
 
 <h1>PROYECTO LARAVEL - BOLSA DE TRABAJO</h1>
