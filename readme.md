@@ -1,3 +1,5 @@
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/dnavarrom)
+
 <h1>PROYECTO LARAVEL - BOLSA DE TRABAJO</h1>
 
 Este proyecto es una aplicación web cuyo objetivo consiste en ofrecer a los alumnos del instituto la posibilidad de inscribirse a múltiples ofertas de trabajo mediante la presentación de candidaturas para aumentar la probabilidad de acceder a un puesto del mercado laboral.
