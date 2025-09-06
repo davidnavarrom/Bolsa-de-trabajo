@@ -1,3 +1,6 @@
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dnavarrom" data-color="#FFDD00" data-emoji="😘"  data-font="Cookie" data-text="Buy me a coffee " data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+
+
 <h1>PROYECTO LARAVEL - BOLSA DE TRABAJO</h1>
 
 Este proyecto es una aplicación web cuyo objetivo consiste en ofrecer a los alumnos del instituto la posibilidad de inscribirse a múltiples ofertas de trabajo mediante la presentación de candidaturas para aumentar la probabilidad de acceder a un puesto del mercado laboral.
