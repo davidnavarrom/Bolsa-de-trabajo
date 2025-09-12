@@ -1,16 +1,16 @@
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/dnavarrom)
 
-<h1>PROYECTO LARAVEL - BOLSA DE TRABAJO</h1>
+<h1>PROYECTO LARAVEL - BOLSA DE EMPLEO</h1>
 
-Este proyecto es una aplicación web cuyo objetivo consiste en ofrecer a los alumnos del instituto la posibilidad de inscribirse a múltiples ofertas de trabajo mediante la presentación de candidaturas para aumentar la probabilidad de acceder a un puesto del mercado laboral.
+Este proyecto es una aplicación web cuyo objetivo consiste en ofrecer a los alumnos del instituto la posibilidad de inscribirse a múltiples ofertas de empleo mediante la presentación de candidaturas para aumentar la probabilidad de acceder a un puesto del mercado laboral.
 
 
 
 <h1>RESUMEN DE FUNCIONALIDAD</h1>
 
-La plataforma muestra ofertas de trabajo que son gestionadas por un administrador. Este administrador puede crear/editar/borrar tantas ofertas de trabajo como necesite.
-Los usuarios deben registrarse en la plataforma para adquirir el rol de candidato y posteriormente poder presentar candidaturas en las ofertas de trabajo que serán evaluadas por un administrador.
-Una vez el administrador consulta las candidaturas de una oferta de trabajo, puede aceptar o rechazar las candidaturas de los usuarios.
+La plataforma muestra ofertas de empleo que son gestionadas por un administrador. Este administrador puede crear/editar/borrar tantas ofertas de empleo como necesite.
+Los usuarios deben registrarse en la plataforma para adquirir el rol de candidato y posteriormente poder presentar candidaturas en las ofertas de empleo que serán evaluadas por un administrador.
+Una vez el administrador consulta las candidaturas de una oferta de empleo, puede aceptar o rechazar las candidaturas de los usuarios.
 
 
 
